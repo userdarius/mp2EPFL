@@ -1,2 +1,11 @@
 .classpath
 .project
+*.class
+
+bin
+
+
+
+
+
+
