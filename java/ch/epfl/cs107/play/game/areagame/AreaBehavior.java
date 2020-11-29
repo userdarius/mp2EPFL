@@ -1,6 +1,9 @@
 package ch.epfl.cs107.play.game.areagame;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
@@ -13,9 +16,8 @@ import ch.epfl.cs107.play.window.Window;
 /**
  * AreaBehavior is a basically a map made of Cells. Those cells are used for the game behavior
  */
-
-public abstract class AreaBehavior{
-
+public abstract class AreaBehavior 
+{
     /// The behavior is an Image of size height x width
     private final Image behaviorMap;
     private final int width, height;
@@ -23,7 +25,7 @@ public abstract class AreaBehavior{
     private final Cell[][] cells;
 
     /**
-     * Default AreaBehavior Construcor
+     * Default AreaBehavior Constructor
      * @param window (Window): graphic context, not null
      * @param name (String): name of the behavior image, not null
      */
@@ -36,6 +38,7 @@ public abstract class AreaBehavior{
         cells = new Cell[width][height];
     }
 
+  
     protected void cellInteractionOf(Interactor interactor){
         for(DiscreteCoordinates dc : interactor.getCurrentCells()){
             if(dc.x < 0 || dc.y < 0 || dc.x >= width || dc.y >= height)
@@ -44,6 +47,7 @@ public abstract class AreaBehavior{
         }
     }
 
+   
     protected void viewInteractionOf(Interactor interactor){
         for(DiscreteCoordinates dc : interactor.getFieldOfViewCells()){
             if(dc.x < 0 || dc.y < 0 || dc.x >= width || dc.y >= height)
@@ -52,6 +56,8 @@ public abstract class AreaBehavior{
         }
     }
 
+
+  
     protected boolean canLeave(Interactable entity, List<DiscreteCoordinates> coordinates) {
 
         for(DiscreteCoordinates c : coordinates){
@@ -63,7 +69,7 @@ public abstract class AreaBehavior{
         return true;
     }
 
-    protected boolean canEnter(Interactable entity, List<DiscreteCoordinates> coordinates) {
+    public boolean canEnter(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for(DiscreteCoordinates c : coordinates){
             if(c.x < 0 || c.y < 0 || c.x >= width || c.y >= height)
                 return false;
@@ -87,7 +93,6 @@ public abstract class AreaBehavior{
         }
     }
 
-
     protected int getRGB(int r, int c) {
     	return behaviorMap.getRGB(r, c);
     }
@@ -106,5 +111,99 @@ public abstract class AreaBehavior{
     
     protected Cell getCell(int x, int y) {
     	return cells[x][y];
+    }
+    
+    // Cell as inner class
+    public abstract class Cell implements Interactable{
+
+        /// Content of the cell as a set of Interactable
+        private Set<Interactable> entities;
+        private DiscreteCoordinates coordinates;
+
+
+        /**
+         * Default Cell constructor
+         * @param x (int): x-coordinate of this cell
+         * @param y (int): y-coordinate of this cell
+         */
+        protected Cell(int x, int y){
+            entities = new HashSet<>();
+            coordinates = new DiscreteCoordinates(x, y);
+        }
+        
+        protected boolean hasNonTraversableContent() {
+    		for (Interactable entity : entities) {
+                if (entity.takeCellSpace())
+                    return true;
+            }
+    		return false;
+    	}
+      
+        /**
+         * Do the given interactor interacts with all Interactable sharing the same cell
+         * @param interactor (Interactor), not null
+         */
+       private void cellInteractionOf(Interactor interactor){ // REFACTOR: must become private with inner class
+            interactor.interactWith(this);
+            for(Interactable interactable : entities){
+                if(interactable.isCellInteractable())
+                    interactor.interactWith(interactable);
+            }
+        }
+
+        /**
+         * Do the given interactor interacts with all Interactable sharing the same cell
+         * @param interactor (Interactor), not null
+         */
+        private  void viewInteractionOf(Interactor interactor){ 
+            interactor.interactWith(this);
+            for(Interactable interactable : entities){
+                if(interactable.isViewInteractable())
+                    interactor.interactWith(interactable);
+            }
+        }
+
+        /**
+         * Do the given interactable enter into this Cell
+         * @param entity (Interactable), not null
+         */
+        protected void enter(Interactable entity) {
+            entities.add(entity);
+        }
+
+        /**
+         * Do the given Interactable leave this Cell
+         * @param entity (Interactable), not null
+         */
+        protected void leave(Interactable entity) {
+            entities.remove(entity);
+        }
+
+        /**
+         * Indicate if the given Interactable can leave this Cell
+         * @param entity (Interactable), not null
+         * @return (boolean): true if entity can leave
+         */
+        protected abstract boolean canLeave(Interactable entity);
+
+        /**
+         * Indicate if the given Interactable can enter this Cell
+         * @param entity (Interactable), not null
+         * @return (boolean): true if entity can enter
+         */
+        protected abstract boolean canEnter(Interactable entity);
+
+        /// Cell implements Interactable
+
+        @Override
+        public boolean takeCellSpace(){
+            return false;
+        }
+
+        @Override
+        public List<DiscreteCoordinates> getCurrentCells() {
+            return Collections.singletonList(coordinates);
+        }
+
     }
 }
