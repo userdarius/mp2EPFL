@@ -14,7 +14,9 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
+import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -23,18 +25,19 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class SuperPacmanPlayer extends Player {
 	private float hp;
 	private TextGraphics message;
-	private Sprite sprite;
+	private Sprite pacman;
 	private Orientation desiredOrientation;
 	private final int SPEED = 6;
 	
 
-	public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
+	public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates, String name) {
 		super(area, orientation, coordinates);
 		this.hp = 10;
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
-		sprite = new Sprite("superpacman/bonus", 1.f, 1.f,this);
+		pacman = new Sprite("superpacman/bonus", 1.f, 1.f,this);
+		desiredOrientation= getOrientation();
 
 		resetMotion();
 	}
@@ -68,6 +71,12 @@ public class SuperPacmanPlayer extends Player {
 		
 	}
 	
+	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
+		public void interactWith (Door door) {
+			setIsPassingADoor(door);    //Objet pour qu'il puisse passer les portes
+		}
+	}
+	
 	
 	
 	
@@ -88,7 +97,7 @@ public class SuperPacmanPlayer extends Player {
 	@Override
 	public boolean wantsCellInteraction() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -99,12 +108,12 @@ public class SuperPacmanPlayer extends Player {
 
 	@Override
 	public void interactWith(Interactable other) {
-		// TODO Auto-generated method stub
+		other.acceptInteraction(new SuperPacmanPlayerHandler());  //Gestion d'interaction faite par Handler
 		
 	}
 
 	@Override
-	public boolean takeCellSpace() {
+	public boolean takeCellSpace() {  //Il sera traversable, donc ne prend pas toute la place de la cellule
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -118,18 +127,18 @@ public class SuperPacmanPlayer extends Player {
 	@Override
 	public boolean isViewInteractable() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		// TODO Auto-generated method stub
+		((SuperPacmanInteractionVisitor)v).interactWith(this);
 		
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
-		// TODO Auto-generated method stub
+		pacman.draw(canvas);
 		
 	}
 

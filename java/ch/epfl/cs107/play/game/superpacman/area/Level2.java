@@ -20,5 +20,10 @@ public class Level2 extends SuperPacmanArea {
 		
 	}
 
+	@Override	
+		public DiscreteCoordinates getPlayerSpawnPosition() {
+			return PLAYER_SPAWN_POSITION;
+	}
+
 	
 }

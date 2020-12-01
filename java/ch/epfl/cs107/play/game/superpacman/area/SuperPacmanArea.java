@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public abstract class SuperPacmanArea extends Area {
@@ -19,6 +20,7 @@ public abstract class SuperPacmanArea extends Area {
 	public final float getCameraScaleFactor() {
 		return 15.f;
 	}
+	public abstract DiscreteCoordinates getPlayerSpawnPosition();
 	
 	   public boolean begin(Window window, FileSystem fileSystem) {
 	       

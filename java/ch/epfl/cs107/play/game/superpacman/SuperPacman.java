@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.area.Level1;
 import ch.epfl.cs107.play.game.superpacman.area.Level2;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.tutosSolution.actor.GhostPlayer;
 import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Ferme;
 import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Village;
@@ -21,12 +22,12 @@ import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacman extends RPG{
 	
-	private SuperPacmanPlayer player;
-	private final String[] areas = {"superpacman/Level0", "superpacman/Level1", "superpacman/Level2"};
-	private final DiscreteCoordinates[] startingPositions = {new DiscreteCoordinates(10, 1), 
-			 new DiscreteCoordinates(15, 6), new DiscreteCoordinates(15, 29)};
+	//private SuperPacmanPlayer player;
+	//private final String[] areas = {"superpacman/Level0", "superpacman/Level1", "superpacman/Level2"};
+	//private final DiscreteCoordinates[] startingPositions = {new DiscreteCoordinates(10, 1), 
+			// new DiscreteCoordinates(15, 6), new DiscreteCoordinates(15, 29)};
 	
-	private int areaIndex;
+	//private int areaIndex;
 	@Override
 	public String getTitle() {
 		
@@ -50,12 +51,13 @@ public class SuperPacman extends RPG{
 		if (super.begin(window, fileSystem)) {
 
 			createAreas();
+			SuperPacmanArea area = (SuperPacmanArea) (setCurrentArea("superpacman/Level0",true));
+			SuperPacmanPlayer pacman = new SuperPacmanPlayer(area, Orientation.UP, area.getPlayerSpawnPosition(),"pacman");
+			//areaIndex = 0;
+			//Area area = setCurrentArea(areas[areaIndex], true);
+			//player = new SuperPacmanPlayer(area, Orientation.DOWN, startingPositions[areaIndex]);
 			
-			areaIndex = 0;
-			Area area = setCurrentArea(areas[areaIndex], true);
-			player = new SuperPacmanPlayer(area, Orientation.DOWN, startingPositions[areaIndex]);
-			
-			initPlayer( player);
+			initPlayer( pacman);
 			return true;
 		}
 		return false;

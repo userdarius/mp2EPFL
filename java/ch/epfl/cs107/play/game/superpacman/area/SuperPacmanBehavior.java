@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2Cell;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 
@@ -32,7 +33,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		for (int y = 0; y < getHeight(); ++y) {
 			for (int x = 0; x < getWidth(); ++x) {
 				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.WALL) {
-					Wall wall = new Wall(area, null, null);
+					boolean[][] neighborhood = neighborhood(x,y);
+					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
+					Wall wall = new Wall(area, coordinates, (neighborhood));
 					area.registerActor(wall);
 				}
 				
@@ -42,10 +45,10 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	
 	public boolean[][] neighborhood(int x, int y) {      // je verifie le voisinage du mur
 		boolean [][] tab = new boolean[3][3];
-		for (int m = 0; m  < 3; m++) {
-			for (int n = 0; n < 3; n++) {
+		for (int m = x -1, r = 0; m < x+2 ; m++, r++) {
+			for (int n = y+1, s = 0; n > y-2 ; n--, s++) {
 			
-				tab[m][n] = (cellexists(x+1-n, y+1-m) && SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1- (y+1-m), x+1-n )) == SuperPacman2CellType.WALL);
+				tab[r][s] = (cellexists(m,n) && SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-n, m )) == SuperPacman2CellType.WALL);
 			}
 		}
 		
@@ -54,7 +57,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	private boolean cellexists(int x, int y) {    //Avoid to getCell that do not exist       //Because we do not use it outside of this class
-		return x > 0 && y > 0 && x < getWidth() && y < getHeight();
+		return ((x > 0) && y > 0 && x < getWidth() && y < getHeight());
 		
 	}
 	
