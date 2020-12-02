@@ -57,7 +57,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	private boolean cellexists(int x, int y) {    //Avoid to getCell that do not exist       //Because we do not use it outside of this class
-		return ((x > 0) && y > 0 && x < getWidth() && y < getHeight());
+		return ((x >= 0) && y >= 0 && x < getWidth() && y < getHeight());
 		
 	}
 	
