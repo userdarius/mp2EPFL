@@ -24,7 +24,7 @@ public class Level0 extends SuperPacmanArea{
 	@Override
 	protected void createArea() {
 		// TODO Auto-generated method stub
-		Door door = new Door("superpacman/Level", LANDING_IN_NEW_AREA , Logic.TRUE, this , Orientation.UP, PRINCIPAL_CELL,OTHER_CELL);
+		Door door = new Door("superpacman/Level1", LANDING_IN_NEW_AREA , Logic.TRUE, this , Orientation.UP, PRINCIPAL_CELL,OTHER_CELL);
 		registerActor(door);
 	}
 
