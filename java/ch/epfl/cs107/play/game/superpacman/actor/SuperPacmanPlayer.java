@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.util.Collections;
 import java.util.List;
 
+import ch.epfl.cs107.play.game.actor.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
@@ -28,6 +29,10 @@ public class SuperPacmanPlayer extends Player {
 	private Sprite pacman;
 	private Orientation desiredOrientation;
 	private final int SPEED = 6;
+	private int score = 0;
+	private static int life = 3;
+	
+	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
 	
 
 	public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates, String name) {
@@ -67,6 +72,7 @@ public class SuperPacmanPlayer extends Player {
 		
 		
 		
+		
 		super.update(deltaTime);
 		
 	}
@@ -77,6 +83,10 @@ public class SuperPacmanPlayer extends Player {
 		}
 	}
 	
+	
+	public static int getLife() {
+		return life;
+	}
 	
 	
 	
@@ -139,7 +149,7 @@ public class SuperPacmanPlayer extends Player {
 	@Override
 	public void draw(Canvas canvas) {
 		pacman.draw(canvas);
-		
+		status.draw(canvas);
 	}
 
 }
