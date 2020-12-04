@@ -21,7 +21,7 @@ import java.util.List;
 public class Door extends AreaEntity{
 
 	/// Door Debug flag. Door is an invisible Entity. When debug, we draw something visible
-	private static final boolean DEBUG_DOOR = true;
+	private static final boolean DEBUG_DOOR = false;
 
 	/// Debug variable : useful only for drawing door debug shape
 	private Polyline debugSquare;

@@ -8,9 +8,9 @@ import java.awt.Color;
 import java.util.Collections;
 import java.util.List;
 
-import ch.epfl.cs107.play.game.actor.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
@@ -29,7 +29,7 @@ public class SuperPacmanPlayer extends Player {
 	private Sprite pacman;
 	private Orientation desiredOrientation;
 	private final int SPEED = 6;
-	private int score = 0;
+	private static int score = 0;
 	private static int life = 3;
 	
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
@@ -81,11 +81,19 @@ public class SuperPacmanPlayer extends Player {
 		public void interactWith (Door door) {
 			setIsPassingADoor(door);    //Objet pour qu'il puisse passer les portes
 		}
+		public void interactWith (CollectableAreaEntity collectableAreaEntity) {
+			collectableAreaEntity.isTaken();
+			score += getScore();
+		}
 	}
 	
 	
 	public static int getLife() {
 		return life;
+	}
+	
+	public static int getScore() {
+		return score;
 	}
 	
 	

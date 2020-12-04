@@ -7,11 +7,15 @@ package ch.epfl.cs107.play.game.superpacman.area;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2Cell;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
+import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
+import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
+import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 
 public class SuperPacmanBehavior extends AreaBehavior{
@@ -37,6 +41,21 @@ public class SuperPacmanBehavior extends AreaBehavior{
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
 					Wall wall = new Wall(area, coordinates, (neighborhood));
 					area.registerActor(wall);
+				}
+				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_DIAMOND) {
+					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
+					Diamond diamond = new Diamond(area, Orientation.DOWN, coordinates );
+					area.registerActor(diamond);
+				}
+				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_CHERRY) {
+					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
+					Cherry cherry = new Cherry(area, Orientation.UP, coordinates);
+					area.registerActor(cherry);
+				}
+				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_BONUS) {
+					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
+					Bonus bonus = new Bonus(area, Orientation.UP, coordinates);
+					area.registerActor(bonus);
 				}
 				
 			}
