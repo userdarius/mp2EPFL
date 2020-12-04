@@ -44,8 +44,8 @@ public class Play {
 		final Window window = new SwingWindow(game.getTitle(), fileSystem, 550, 550);
 		window.registerFonts(ResourcePath.FONTS);
 		
-		Recorder recorder = new Recorder(window);
-		RecordReplayer replayer = new RecordReplayer(window);
+		//Recorder recorder = new Recorder(window);
+		//RecordReplayer replayer = new RecordReplayer(window);
 		try {
 
 			if (game.begin(window, fileSystem)) {

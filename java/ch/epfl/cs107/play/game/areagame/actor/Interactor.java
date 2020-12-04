@@ -29,9 +29,7 @@ public interface Interactor {
     /**@return (boolean): true if this require cell interaction */
     boolean wantsCellInteraction();
     /**@return (boolean): true if this require view interaction */
-    boolean wantsViewInteraction();n Interactable
-     * The interaction is implemented on the interactor side !
-     * @param other (Interactae other);
+    boolean wantsViewInteraction();
 
     /**
      * Do this Interactor interact with the given Interactable
