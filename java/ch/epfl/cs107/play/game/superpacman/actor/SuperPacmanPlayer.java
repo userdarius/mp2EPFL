@@ -171,6 +171,7 @@ public class SuperPacmanPlayer extends Player {
 	@Override
 	public void draw(Canvas canvas) {
 		animations[getOrientation().ordinal()].draw(canvas);
+		status.draw(canvas);
 	}
 	
 	/*@Override
