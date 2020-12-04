@@ -10,12 +10,14 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
+import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -25,10 +27,10 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class SuperPacmanPlayer extends Player {
 	private float hp;
 	private TextGraphics message;
-	private Sprite pacman;
 	private Orientation desiredOrientation;
 	private final int SPEED = 6;
-	
+	private static final int ANIMATION_DURATION = 4;
+	private Animation[] animations;
 
 	public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates, String name) {
 		super(area, orientation, coordinates);
@@ -36,10 +38,11 @@ public class SuperPacmanPlayer extends Player {
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
-		pacman = new Sprite("superpacman/bonus", 1.f, 1.f,this);
-		desiredOrientation= getOrientation();
-
-		resetMotion();
+		//pacman = new Sprite("superpacman/bonus", 1.f, 1.f,this);
+		extractsprites();
+		
+		desiredOrientation = Orientation.RIGHT;
+		
 	}
 	
 	public void update(float deltaTime) {
@@ -59,10 +62,25 @@ public class SuperPacmanPlayer extends Player {
 			desiredOrientation = Orientation.DOWN;
 		}
 		
+		if(isDisplacementOccurs()) {
+			animations[getOrientation().ordinal()].update(deltaTime);
+		}
+		
+		
+		
 		if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector())))) {
-			orientate(desiredOrientation); // le faire tourner
+			Orientation previousOrientation = getOrientation();
+			orientate(desiredOrientation);// le faire tourner
+			if (previousOrientation != getOrientation()) {
+				animations[getOrientation().ordinal()].reset();	
+				}
+		
 			move(SPEED);
 			
+		}
+		
+		if(!isDisplacementOccurs()) {
+			animations[getOrientation().ordinal()].reset();
 		}
 		
 		
@@ -76,11 +94,6 @@ public class SuperPacmanPlayer extends Player {
 			setIsPassingADoor(door);    //Objet pour qu'il puisse passer les portes
 		}
 	}
-	
-	
-	
-	
-	
 	
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
@@ -138,8 +151,18 @@ public class SuperPacmanPlayer extends Player {
 
 	@Override
 	public void draw(Canvas canvas) {
-		pacman.draw(canvas);
-		
+		animations[getOrientation().ordinal()].draw(canvas);
 	}
-
+	
+	/*@Override
+	public void draw(Canvas canvas) {
+		frames[currentFrame].draw(canvas);
+	}*/
+	
+	public void extractsprites() {		
+		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
+                new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
+        animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
+	}
+	
 }
