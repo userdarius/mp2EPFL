@@ -49,4 +49,8 @@ import ch.epfl.cs107.play.window.Canvas;
 		score.draw(canvas);
 	}
 
+
+
+
 }
+

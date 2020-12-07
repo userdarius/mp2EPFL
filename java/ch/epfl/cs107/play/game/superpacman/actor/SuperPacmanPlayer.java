@@ -10,7 +10,10 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
+<<<<<<< Updated upstream
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
+=======
+>>>>>>> Stashed changes
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -30,8 +33,11 @@ public class SuperPacmanPlayer extends Player {
 	private TextGraphics message;
 	private Orientation desiredOrientation;
 	private final int SPEED = 6;
+<<<<<<< Updated upstream
 	private static final int ANIMATION_DURATION = 4;
 	private Animation[] animations;
+=======
+>>>>>>> Stashed changes
 	private static int score = 0;
 	private static int life = 3;
 	
@@ -110,6 +116,10 @@ public class SuperPacmanPlayer extends Player {
 	public static int getScore() {
 		return score;
 	}
+<<<<<<< Updated upstream
+=======
+	
+>>>>>>> Stashed changes
 	
 	
 

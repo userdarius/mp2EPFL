@@ -1,10 +1,9 @@
 /* 
  * Author: Maxime Hilbig
- * Date: 04.12.2020
+ * Date: 07.12.2020
  */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
@@ -12,35 +11,22 @@ import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Cherry extends CollectableAreaEntity {
+public class Key extends CollectableAreaEntity{
 
-	public Cherry(Area area, Orientation orientation, DiscreteCoordinates position) {
+	public Key(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
-
-
-		
-	}
-
-	private Sprite cherry = new Sprite("superpacman/cherry", 1.f, 1.f, this);
-
-
-	
-	
-	public int getValue() {
-		return 200;
 		
 	}
 	
-	
+	private Sprite key = new Sprite("superpacman/key", 1.f, 1.f, this);
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		// TODO Auto-generated method stub
-		return Collections.singletonList(getCurrentMainCellCoordinates());
+		return null;
 	}
 
 	@Override
@@ -52,7 +38,7 @@ public class Cherry extends CollectableAreaEntity {
 	@Override
 	public boolean isCellInteractable() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
@@ -63,13 +49,14 @@ public class Cherry extends CollectableAreaEntity {
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
-		cherry.draw(canvas);
+		key.draw(canvas);
 		
 	}
+
 }
