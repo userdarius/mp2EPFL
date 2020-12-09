@@ -25,6 +25,7 @@ public class Blinky extends CollectableAreaEntity{
 	private Animation[] animations;
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
 
+	//test intellij for git
 	
 	public Blinky(Area area, Orientation orientation, DiscreteCoordinates position, String name) {
 		super(area, orientation, position);
