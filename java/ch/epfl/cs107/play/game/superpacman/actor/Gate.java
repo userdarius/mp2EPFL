@@ -4,43 +4,52 @@
  */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
+import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.RegionOfInterest;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Key extends CollectableAreaEntity{
+public class Gate extends AreaEntity {
+	
+	private Logic signal;
+	private Sprite gate;
 
-	public Key(Area area, Orientation orientation, DiscreteCoordinates position) {
+	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
 		super(area, orientation, position);
-		
+		signal = this.signal;
+		if (orientation == Orientation.UP || orientation == Orientation.DOWN) {
+			gate = new Sprite("superpacman/gate", 1.f, 1.f, this, new RegionOfInterest(0,0, 64, 64));
+		} else {
+			gate = new Sprite("superpacman/gate", 1.f, 1.f, this, new RegionOfInterest(0,64, 64, 64));
+		}
 	}
 	
-	private Sprite key = new Sprite("superpacman/key", 1.f, 1.f, this);
-
+	
+	
+	
+	
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
-		
-		return Collections.singletonList(getCurrentMainCellCoordinates());
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public boolean takeCellSpace() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean takeCellSpace() {  //Place deja occupém
+		return signal.isOff();
 	}
 
 	@Override
 	public boolean isCellInteractable() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
@@ -51,13 +60,15 @@ public class Key extends CollectableAreaEntity{
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
-		key.draw(canvas);
+		if (signal.isOff()) {
+		gate.draw(canvas);
+		}
 		
 	}
 

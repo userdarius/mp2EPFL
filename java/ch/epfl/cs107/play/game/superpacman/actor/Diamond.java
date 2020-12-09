@@ -20,23 +20,22 @@ public class Diamond extends CollectableAreaEntity{
 
 	public Diamond(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
-<<<<<<< Updated upstream
-		super.value = 10;
-=======
+
+
 		
->>>>>>> Stashed changes
+
 	}
 	
 	private Sprite diamond = new Sprite ("superpacman/diamond", 1.f, 1.f, this);
 
-<<<<<<< Updated upstream
-=======
+
+
 	public int getValue() {
 		return 10;
 	}
 	
 	
->>>>>>> Stashed changes
+
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		// TODO Auto-generated method stub
