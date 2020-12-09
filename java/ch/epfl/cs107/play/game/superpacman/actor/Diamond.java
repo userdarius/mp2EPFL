@@ -32,6 +32,7 @@ public class Diamond extends CollectableAreaEntity{
 	}
 	
 	
+
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		// TODO Auto-generated method stub
