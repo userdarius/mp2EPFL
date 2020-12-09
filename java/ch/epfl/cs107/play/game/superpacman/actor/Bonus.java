@@ -1,7 +1,4 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 04.12.2020
- */
+
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.util.Collections;

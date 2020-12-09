@@ -1,7 +1,4 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 27.11.2020
- */
+
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.awt.Color;
@@ -10,10 +7,7 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
-<<<<<<< Updated upstream
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
-=======
->>>>>>> Stashed changes
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -33,11 +27,9 @@ public class SuperPacmanPlayer extends Player {
 	private TextGraphics message;
 	private Orientation desiredOrientation;
 	private final int SPEED = 6;
-<<<<<<< Updated upstream
-	private static final int ANIMATION_DURATION = 4;
+	private static final int ANIMATION_DURATION = 8;
 	private Animation[] animations;
-=======
->>>>>>> Stashed changes
+
 	private static int score = 0;
 	private static int life = 3;
 	
@@ -116,12 +108,6 @@ public class SuperPacmanPlayer extends Player {
 	public static int getScore() {
 		return score;
 	}
-<<<<<<< Updated upstream
-=======
-	
->>>>>>> Stashed changes
-	
-	
 
 	
 	@Override
@@ -184,10 +170,6 @@ public class SuperPacmanPlayer extends Player {
 		status.draw(canvas);
 	}
 	
-	/*@Override
-	public void draw(Canvas canvas) {
-		frames[currentFrame].draw(canvas);
-	}*/
 	
 	public void extractsprites() {		
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
