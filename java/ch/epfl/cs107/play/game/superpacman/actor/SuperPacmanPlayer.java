@@ -27,7 +27,7 @@ public class SuperPacmanPlayer extends Player {
 	private TextGraphics message;
 	private Orientation desiredOrientation;
 	private final int SPEED = 6;
-	private static final int ANIMATION_DURATION = 4;
+	private static final int ANIMATION_DURATION = 8;
 	private Animation[] animations;
 
 	private static int score = 0;
