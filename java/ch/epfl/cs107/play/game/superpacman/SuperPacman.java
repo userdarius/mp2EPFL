@@ -7,6 +7,7 @@ package ch.epfl.cs107.play.game.superpacman;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.RPG;
+import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.area.Level1;
@@ -57,7 +58,7 @@ public class SuperPacman extends RPG{
 			//Area area = setCurrentArea(areas[areaIndex], true);
 			//player = new SuperPacmanPlayer(area, Orientation.DOWN, startingPositions[areaIndex]);
 			
-			initPlayer( pacman);
+			initPlayer(pacman);
 			return true;
 		}
 		return false;

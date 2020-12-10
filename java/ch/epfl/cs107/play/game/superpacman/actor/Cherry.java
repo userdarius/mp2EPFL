@@ -20,22 +20,13 @@ public class Cherry extends CollectableAreaEntity {
 
 	public Cherry(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
-
-
-		
 	}
 
 	private Sprite cherry = new Sprite("superpacman/cherry", 1.f, 1.f, this);
 
-
-	
-	
 	public int getValue() {
 		return 200;
-		
 	}
-	
-	
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {

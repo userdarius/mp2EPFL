@@ -17,10 +17,8 @@ import ch.epfl.cs107.play.window.Canvas;
 
 
  class SuperPacmanPlayerStatusGUI implements Graphics {
-	
-	private final int DEPTH = 0; //profondeur de l'image
-	
-	@Override
+
+	 @Override
 	public void draw(Canvas canvas) {
 		// TODO Auto-generated method stub
 		float width = canvas.getScaledWidth();
@@ -29,7 +27,9 @@ import ch.epfl.cs107.play.window.Canvas;
 		
 		
 		for (int i = 0; i < 5; i++) {
-		if(i<SuperPacmanPlayer.getLife()) {
+			//profondeur de l'image
+			int DEPTH = 0;
+			if(i<SuperPacmanPlayer.getLife()) {
 		ImageGraphics life = new
 				ImageGraphics(ResourcePath.getSprite("superpacman/lifeDisplay"),
 				1.f, 1.f, new RegionOfInterest(0, 0, 64, 64),

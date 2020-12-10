@@ -25,15 +25,13 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class SuperPacmanPlayer extends Player {
 	private float hp;
-	private TextGraphics message;
+	private final TextGraphics message;
 	private Orientation desiredOrientation;
-	private final int SPEED = 6;
 	private static final int ANIMATION_DURATION = 8;
 	private Animation[] animations;
 
 	private static int score = 0;
-	private static int life = 3;
-	
+
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
 
 	public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates, String name) {
@@ -67,16 +65,15 @@ public class SuperPacmanPlayer extends Player {
 		if(isDisplacementOccurs()) {
 			animations[getOrientation().ordinal()].update(deltaTime);
 		}
-		
-		
-		
+
 		if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector())))) {
 			Orientation previousOrientation = getOrientation();
 			orientate(desiredOrientation);// le faire tourner
 			if (previousOrientation != getOrientation()) {
 				animations[getOrientation().ordinal()].reset();	
 				}
-		
+
+			int SPEED = 6;
 			move(SPEED);
 			
 		}
@@ -84,10 +81,7 @@ public class SuperPacmanPlayer extends Player {
 		if(!isDisplacementOccurs()) {
 			animations[getOrientation().ordinal()].reset();
 		}
-		
-		
-		
-		
+
 		super.update(deltaTime);
 		
 	}
@@ -106,9 +100,9 @@ public class SuperPacmanPlayer extends Player {
 			
 		}
 	}
-	
-	
+
 	public static int getLife() {
+		int life = 3;
 		return life;
 	}
 	
