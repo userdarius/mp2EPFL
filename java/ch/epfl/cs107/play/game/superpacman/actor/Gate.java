@@ -4,6 +4,7 @@
  */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
@@ -23,11 +24,11 @@ public class Gate extends AreaEntity {
 
 	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
 		super(area, orientation, position);
-		signal = this.signal;
+		this.signal = signal;
 		if (orientation == Orientation.UP || orientation == Orientation.DOWN) {
-			gate = new Sprite("superpacman/gate", 1.f, 1.f, this, new RegionOfInterest(0,0, 64, 64));
+			gate = new Sprite("superpacman/gate", 1.f, 1.f, this, new RegionOfInterest(0, 0, 64, 64));
 		} else {
-			gate = new Sprite("superpacman/gate", 1.f, 1.f, this, new RegionOfInterest(0,64, 64, 64));
+			gate = new Sprite("superpacman/gate", 1.f, 1.f, this, new RegionOfInterest(0, 64, 64, 64));
 		}
 	}
 	
@@ -38,7 +39,7 @@ public class Gate extends AreaEntity {
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		// TODO Auto-generated method stub
-		return null;
+		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
 
 	@Override

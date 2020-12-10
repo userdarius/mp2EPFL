@@ -20,6 +20,8 @@ import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 
 public class SuperPacmanBehavior extends AreaBehavior{
 	
+	
+	
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
 		 
@@ -46,6 +48,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
 					Diamond diamond = new Diamond(area, Orientation.DOWN, coordinates );
 					area.registerActor(diamond);
+					((SuperPacmanArea)area).addDiamonds();
+					
 				}
 				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_CHERRY) {
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
@@ -94,14 +98,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	
 	
 	
 	
@@ -120,31 +117,11 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	
-	
-	
-	
-	
-	
 	private boolean cellexists(int x, int y) {    //Avoid to getCell that do not exist       //Because we do not use it outside of this class
 		return ((x >= 0) && y >= 0 && x < getWidth() && y < getHeight());
 		
 	}
 	
-
-
-
-		// TODO Auto-generated constructor stub
-
-
 	enum SuperPacman2CellType{
 		NONE(0), // never used as real content
 		WALL ( -16777216), //black

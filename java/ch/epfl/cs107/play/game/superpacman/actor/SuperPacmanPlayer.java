@@ -16,6 +16,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -98,6 +99,10 @@ public class SuperPacmanPlayer extends Player {
 		public void interactWith (CollectableAreaEntity collectableAreaEntity) {
 			collectableAreaEntity.isTaken();
 			score += collectableAreaEntity.getValue();
+			if (collectableAreaEntity instanceof Diamond) {
+				((SuperPacmanArea)getOwnerArea()).removeDiamonds();
+				
+			}
 			
 		}
 	}

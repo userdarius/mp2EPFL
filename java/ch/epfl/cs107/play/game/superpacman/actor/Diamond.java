@@ -14,10 +14,13 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Diamond extends CollectableAreaEntity{
+public class Diamond extends CollectableAreaEntity implements Logic{
 
+	//private int numberOfDiamondsCollected = 0;
+	
 	public Diamond(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		super.value = 10;
@@ -67,6 +70,44 @@ public class Diamond extends CollectableAreaEntity{
 	public void draw(Canvas canvas) {
 		diamond.draw(canvas);
 		
+		
+	}
+	
+	@Override
+	public void isTaken() {
+		super.isTaken();
+		//numberOfDiamondsCollected++;
+		
+		
+		
+	}
+	
+	//public int  getNumberOfDiamondsCollected() {
+		//return numberOfDiamondsCollected;
+	//}
+
+
+
+	@Override
+	public boolean isOn() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public boolean isOff() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public float getIntensity() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
