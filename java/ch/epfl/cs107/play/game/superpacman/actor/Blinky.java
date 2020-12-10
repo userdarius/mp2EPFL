@@ -38,7 +38,7 @@ public class Blinky extends CollectableAreaEntity{
 	}
 
 	public void extractsprites() {		
-		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/ghost.blinky", 4, 1, 1, this, 32, 64,
+		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/ghost.blinky", 2, 1, 1, this, 32, 64,
                 new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
         animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
 	}
