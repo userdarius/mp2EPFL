@@ -27,23 +27,33 @@ public class Blinky extends MovableAreaEntity{
 	private Animation[] animations;
 	private Orientation desiredOrientation;
 	private static final int MAX = 100;
+	private static final int radius = 5;
 	private static float timer = 10;
-	private static int randomInt = RandomGenerator.getInstance().nextInt(4);
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
 
 
 	public Blinky(Area area, Orientation orientation, DiscreteCoordinates position, String name) {
 		super(area, orientation, position);
 		extractsprites();
-		desiredOrientation = Orientation.fromInt(randomInt);
+		desiredOrientation = getOrientation();
 	}
 	
 	public void update(float deltaTime) {
+		int randomInt = RandomGenerator.getInstance().nextInt(4);
+		if(isDisplacementOccurs()) {
+			desiredOrientation = Orientation.fromInt(randomInt);
+			animations[getOrientation().ordinal()].update(deltaTime);
+		}
 		desiredOrientation = Orientation.fromInt(randomInt);
-		animations[getOrientation().ordinal()].update(deltaTime);
-
-		int SPEED = 6;
-		move(SPEED);
+		if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector())))) {
+			Orientation previousOrientation = getOrientation();
+			orientate(desiredOrientation);// le faire tourner
+			if (previousOrientation != getOrientation()) {
+				animations[getOrientation().ordinal()].reset();
+			}
+			int SPEED = 6;
+			move(SPEED);
+		}
 
 		if(!isDisplacementOccurs()) {
 			animations[getOrientation().ordinal()].reset();

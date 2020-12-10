@@ -28,7 +28,6 @@ public class Pinky extends MovableAreaEntity{
 	private Orientation desiredOrientation;
 	private static final int MAX = 100;
 	private static float timer = 10;
-	private static int randomInt = RandomGenerator.getInstance().nextInt(MAX);
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
 
 
@@ -39,24 +38,26 @@ public class Pinky extends MovableAreaEntity{
 	}
 
 	public void update(float deltaTime) {
-		/*if(isDisplacementOccurs()){
+		int randomInt = RandomGenerator.getInstance().nextInt(4);
+		if(isDisplacementOccurs()) {
 			desiredOrientation = Orientation.fromInt(randomInt);
 			animations[getOrientation().ordinal()].update(deltaTime);
 		}
+		desiredOrientation = Orientation.fromInt(randomInt);
 		if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector())))) {
 			Orientation previousOrientation = getOrientation();
 			orientate(desiredOrientation);// le faire tourner
 			if (previousOrientation != getOrientation()) {
 				animations[getOrientation().ordinal()].reset();
 			}
-
 			int SPEED = 6;
 			move(SPEED);
-
 		}
+
 		if(!isDisplacementOccurs()) {
 			animations[getOrientation().ordinal()].reset();
 		}
+
 		/*if(!isGhostAfraid()){
 			if (timer >= 0){
 				extractafraidsprites();
