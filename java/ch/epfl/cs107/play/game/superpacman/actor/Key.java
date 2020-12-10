@@ -14,10 +14,13 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Key extends CollectableAreaEntity{
+public class Key extends CollectableAreaEntity implements Logic{
 
+	private boolean isCollected = false;
+	
 	public Key(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		
@@ -59,6 +62,30 @@ public class Key extends CollectableAreaEntity{
 	public void draw(Canvas canvas) {
 		key.draw(canvas);
 		
+	}
+	@Override 
+	public void isTaken() {
+		super.isTaken();
+		isCollected = true;
+		
+	}
+
+	@Override
+	public boolean isOn() {
+		// TODO Auto-generated method stub
+		return isCollected;
+	}
+
+	@Override
+	public boolean isOff() {
+		// TODO Auto-generated method stub
+		return !isCollected;
+	}
+
+	@Override
+	public float getIntensity() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
