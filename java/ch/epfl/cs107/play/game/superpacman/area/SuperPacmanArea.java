@@ -39,6 +39,13 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 		}
 	}
 	
+	public void notAffraid() {
+		ArrayList<Ghost> tab = behavior.AffraidGhost;
+		for(int i = 0; i < tab.size(); i++) {
+			behavior.AffraidGhost.get(i).disaffraid();
+		}
+	}
+	
 	
 	
 	@Override 

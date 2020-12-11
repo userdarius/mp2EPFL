@@ -22,6 +22,7 @@ import ch.epfl.cs107.play.window.Window;
 
 
 public class SuperPacman extends RPG{
+	private SuperPacmanPlayer pacman;
 	
 	//private SuperPacmanPlayer player;
 	//private final String[] areas = {"superpacman/Level0", "superpacman/Level1", "superpacman/Level2"};
@@ -35,7 +36,13 @@ public class SuperPacman extends RPG{
 		return "Super Pac-Man";
 	}
 	
-	public void update(float deltaTime ) {super.update(deltaTime);
+	public void update(float deltaTime ) {
+		super.update(deltaTime);
+		if (pacman.invulnerable()) {
+			((SuperPacmanArea) pacman.getOwnerArea()).affraid();
+		} else {
+			((SuperPacmanArea) pacman.getOwnerArea()).notAffraid();
+		}
 	
 	}
 	
@@ -53,7 +60,7 @@ public class SuperPacman extends RPG{
 
 			createAreas();
 			SuperPacmanArea area = (SuperPacmanArea) (setCurrentArea("superpacman/Level0",true));
-			SuperPacmanPlayer pacman = new SuperPacmanPlayer(area, Orientation.UP, area.getPlayerSpawnPosition(),"pacman");
+			pacman = new SuperPacmanPlayer(area, Orientation.UP, area.getPlayerSpawnPosition(),"pacman");
 			//areaIndex = 0;
 			//Area area = setCurrentArea(areas[areaIndex], true);
 			//player = new SuperPacmanPlayer(area, Orientation.DOWN, startingPositions[areaIndex]);
@@ -63,7 +70,7 @@ public class SuperPacman extends RPG{
 		}
 		return false;
 	}
-
+	
 	
 	
 

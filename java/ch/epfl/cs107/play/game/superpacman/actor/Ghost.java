@@ -22,7 +22,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	
 	
 	private static final int radius = 5;
-	boolean affraid = false;
+	private boolean affraid;
 	private SuperPacmanPlayer memory;
 	private GhostHandler GhostHandler;
 	private List<DiscreteCoordinates> fieldOfView;
@@ -35,6 +35,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	}
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		
 	}
 
 	@Override
