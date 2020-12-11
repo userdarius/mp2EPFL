@@ -62,25 +62,23 @@ public class SuperPacmanBehavior extends AreaBehavior{
 					Bonus bonus = new Bonus(area, Orientation.UP, coordinates);
 					area.registerActor(bonus);
 				}
-				/*if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_BLINKY) {
-					boolean[][] ghostneighborhood = ghostneighborhood(x,y);
+
+				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_BLINKY) {
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
-					Blinky blinky = new Blinky(area, coordinates, (ghostneighborhood), "blinky");
+					Blinky blinky = new Blinky(area, Orientation.DOWN, coordinates, "blinky");
 					area.registerActor(blinky);
 				}
 				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_INKY) {
-					boolean[][] ghostneighborhood = ghostneighborhood(x,y);
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
-					Inky inky = new Inky(area, coordinates, (ghostneighborhood), "inky");
+					Inky inky = new Inky(area, Orientation.UP, coordinates, "inky");
 					area.registerActor(inky);
 				}
 				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
-					boolean[][] ghostneighborhood = ghostneighborhood(x,y);
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
-					Pinky pinky = new Pinky(area, coordinates, (ghostneighborhood), "pinky");
+					Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
 					area.registerActor(pinky);
-				}*/
-				
+				}
+
 			}
 		}
 	}
@@ -97,14 +95,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		return tab;
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	public boolean[][] ghostneighborhood(int x, int y) {      // je verifie le voisinage des fantomes
+
+	//test les environs des ghosts
+	/*public boolean[][] ghostneighborhood(int x, int y) {      // je verifie le voisinage des fantomes
 		boolean [][] tab = new boolean[5][5];
 		for (int m = x -1, r = 0; m < x+2 ; m++, r++) {
 			for (int n = y+1, s = 0; n > y-2 ; n--, s++) {
@@ -115,7 +108,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			}
 		}
 		return tab;
-	}
+	}*/
 	
 	
 	private boolean cellexists(int x, int y) {    //Avoid to getCell that do not exist       //Because we do not use it outside of this class
