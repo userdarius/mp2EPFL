@@ -31,6 +31,8 @@ public class SuperPacmanPlayer extends Player {
 	private final int SPEED = 8;
 	private static final int ANIMATION_DURATION = 8;
 	private Animation[] animations;
+	private boolean invulnerable = false;
+	private static float timer = 10;
 
 	private static int score = 0;
 
@@ -48,9 +50,10 @@ public class SuperPacmanPlayer extends Player {
 	}
 	
 	public void update(float deltaTime) {
-		if (hp > 0) {
-			hp -=deltaTime;
-			message.setText(Integer.toString((int)hp));
+		if (timer > 0) {
+			timer -= deltaTime;
+			
+		
 		}
 		if (hp < 0) hp = 0.f;
 		Keyboard keyboard= getOwnerArea().getKeyboard();
@@ -99,6 +102,12 @@ public class SuperPacmanPlayer extends Player {
 				((SuperPacmanArea)getOwnerArea()).removeDiamonds();
 				
 			}
+			if (collectableAreaEntity instanceof Bonus) {
+				while (timer >= 0) {                 //timer décrémenté dans update
+					invulnerable = true;
+					
+				}
+			}
 			
 		}
 	}
@@ -111,6 +120,8 @@ public class SuperPacmanPlayer extends Player {
 	public static int getScore() {
 		return score;
 	}
+	
+	
 
 
 	

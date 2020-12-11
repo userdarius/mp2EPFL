@@ -27,8 +27,7 @@ public class Blinky extends Ghost{
 	private Animation[] animations;
 	private Orientation desiredOrientation;
 	private static final int MAX = 100;
-	private static final int radius = 5;
-	private static float timer = 10;
+	
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
 
 
@@ -87,22 +86,7 @@ public class Blinky extends Ghost{
 	
 	
 	
-	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean takeCellSpace() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCellInteractable() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+	
 
 
 	public boolean isGhostAfraid(){

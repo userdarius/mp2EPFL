@@ -41,6 +41,7 @@ public class Bonus extends CollectableAreaEntity{
 		// TODO Auto-generated method stub
 		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
+	
 
 	@Override
 	public boolean takeCellSpace() {

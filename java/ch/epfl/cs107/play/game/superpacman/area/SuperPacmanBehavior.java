@@ -1,6 +1,8 @@
 
 package ch.epfl.cs107.play.game.superpacman.area;
 
+import java.util.ArrayList;
+
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
@@ -15,6 +17,7 @@ import ch.epfl.cs107.play.window.Window;
 import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
 import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
 import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
+import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.game.superpacman.actor.Inky;
 import ch.epfl.cs107.play.game.superpacman.actor.Pinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
@@ -28,6 +31,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	public boolean hasRightEdge = false;
 	public boolean hasDownEdge = false;
 	public boolean hasTopEdge = false;
+	
+	
 	
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
@@ -79,16 +84,19 @@ public class SuperPacmanBehavior extends AreaBehavior{
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
 					Blinky blinky = new Blinky(area, Orientation.DOWN, coordinates, "blinky");
 					area.registerActor(blinky);
+					AffraidGhost.add(blinky);
 				}
 				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_INKY) {
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
 					Inky inky = new Inky(area, Orientation.UP, coordinates, "inky");
 					area.registerActor(inky);
+					AffraidGhost.add(inky);
 				}
 				if (SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x,y);
 					Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
 					area.registerActor(pinky);
+					AffraidGhost.add(pinky);
 				}
 
 			}
@@ -127,6 +135,17 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		return ((x >= 0) && y >= 0 && x < getWidth() && y < getHeight());
 		
 	}
+	public ArrayList <Ghost> AffraidGhost = new ArrayList<Ghost>();
+	public void Affraid(Ghost g) {
+		for ( int i = 0; i < AffraidGhost.size(); i++ ) {
+			AffraidGhost.get(i);
+			
+		}
+		
+		
+		
+		
+	}
 	
 	enum SuperPacman2CellType{
 		NONE(0), // never used as real content
@@ -156,6 +175,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			System.out.println(type);
 			return NONE;
 		}
+		
+		
 		
 	}
 	

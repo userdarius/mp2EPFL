@@ -17,7 +17,10 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Ghost extends MovableAreaEntity implements Interactor {
-
+	
+	
+	private static final int radius = 5;
+	
 	public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		
