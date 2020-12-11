@@ -16,14 +16,17 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 
 public class Gate extends AreaEntity {
 	
 	private Logic signal;
 	private Sprite gate;
 
-	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
+	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal ) {
 		super(area, orientation, position);
+		
+
 		this.signal = signal;
 		if (orientation == Orientation.UP || orientation == Orientation.DOWN) {
 			gate = new Sprite("superpacman/gate", 1.f, 1.f, this, new RegionOfInterest(0, 0, 64, 64));

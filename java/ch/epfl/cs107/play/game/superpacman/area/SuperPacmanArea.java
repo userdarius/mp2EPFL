@@ -18,7 +18,6 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 
 	protected abstract void createArea();
 	
-	
 	protected void addDiamonds() {
 		numberOfDiamonds++;
 	}
@@ -29,6 +28,7 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 	public int getNumberOfDiamonds() {
 		return numberOfDiamonds;
 	}
+	
 	
 	
 	@Override 
