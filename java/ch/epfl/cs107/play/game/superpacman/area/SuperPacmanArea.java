@@ -40,6 +40,16 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 	public boolean isOff() {
 		return !(numberOfDiamonds == 0);
 	}
+	@Override
+	public float getIntensity() {
+		if (isOn()) {
+			return 1.f;
+		}
+		else {
+			return 0.f;
+		}
+	}
+	
 	
 	@Override
 	public final float getCameraScaleFactor() {

@@ -9,6 +9,7 @@ import ch.epfl.cs107.play.game.superpacman.actor.Gate;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.And;
+import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Level2 extends SuperPacmanArea {
 	private final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
@@ -52,7 +53,7 @@ public class Level2 extends SuperPacmanArea {
 		Key key4 = new Key(this, Orientation.UP, KEY4);
 		registerActor(key4);
 		
-		Key combinationKey = key3;
+		And combination = new And(key3, key4);
 		
 		
 		Gate gate1 = new Gate(this, Orientation.RIGHT, GATE1, key1);
@@ -71,13 +72,13 @@ public class Level2 extends SuperPacmanArea {
 		registerActor(gate7);
 		Gate gate8 = new Gate(this, Orientation.RIGHT, GATE8, key2);
 		registerActor(gate8);
-		Gate gate9 = new Gate(this, Orientation.RIGHT, GATE9, combinationKey);
+		Gate gate9 = new Gate(this, Orientation.RIGHT, GATE9, combination);
 		registerActor(gate9);
-		Gate gate10 = new Gate(this, Orientation.RIGHT, GATE10, combinationKey);
+		Gate gate10 = new Gate(this, Orientation.RIGHT, GATE10, combination);
 		registerActor(gate10);
-		Gate gate11 = new Gate(this, Orientation.RIGHT, GATE11, combinationKey);
+		Gate gate11 = new Gate(this, Orientation.RIGHT, GATE11, combination);
 		registerActor(gate11);
-		Gate gate12 = new Gate(this, Orientation.RIGHT, GATE12, combinationKey);
+		Gate gate12 = new Gate(this, Orientation.RIGHT, GATE12, combination);
 		registerActor(gate12);
 		Gate gate13 = new Gate(this, Orientation.RIGHT, GATE13, this);
 		registerActor(gate13);

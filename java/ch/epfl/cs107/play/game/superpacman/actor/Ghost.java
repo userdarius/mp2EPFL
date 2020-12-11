@@ -1,6 +1,6 @@
 /* 
  * Author: Maxime Hilbig
- * Date: 07.12.2020
+ * Date: 11.12.2020
  */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
@@ -8,30 +8,28 @@ import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Key extends CollectableAreaEntity implements Logic{
+public class Ghost extends MovableAreaEntity implements Interactor {
 
-	private boolean isCollected = false;
-	
-	public Key(Area area, Orientation orientation, DiscreteCoordinates position) {
+	public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		
+		
 	}
-	
-	private Sprite key = new Sprite("superpacman/key", 1.f, 1.f, this);
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
-		
 		return Collections.singletonList(getCurrentMainCellCoordinates());
+	}
+	public int getValue() {
+		return 500;
 	}
 
 	@Override
@@ -43,7 +41,7 @@ public class Key extends CollectableAreaEntity implements Logic{
 	@Override
 	public boolean isCellInteractable() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
@@ -54,42 +52,38 @@ public class Key extends CollectableAreaEntity implements Logic{
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
-		key.draw(canvas);
-		
-	}
-	@Override 
-	public void isTaken() {
-		super.isTaken();
-		isCollected = true;
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean isOn() {
+	public List<DiscreteCoordinates> getFieldOfViewCells() {
 		// TODO Auto-generated method stub
-		return isCollected;
+		return null;
 	}
 
 	@Override
-	public boolean isOff() {
+	public boolean wantsCellInteraction() {
 		// TODO Auto-generated method stub
-		return !isCollected;
+		return false;
 	}
 
 	@Override
-	public float getIntensity() {
-		if (isOn()) {
-			return 1.f;
-		}
-		else {
-			return 0.f;
-		}
+	public boolean wantsViewInteraction() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void interactWith(Interactable other) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

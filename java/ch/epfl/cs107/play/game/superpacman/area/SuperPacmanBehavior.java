@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
+import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
@@ -22,6 +23,11 @@ import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 public class SuperPacmanBehavior extends AreaBehavior{
 	
 	
+	public AreaGraph grille = new AreaGraph();
+	public boolean hasLeftEdge = false;
+	public boolean hasRightEdge = false;
+	public boolean hasDownEdge = false;
+	public boolean hasTopEdge = false;
 	
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
@@ -34,6 +40,12 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		            setCell(x,y, new SuperPacmanCell(x,y,color));
 		        }
 		    }
+		 // debut du 4.6 avec Mathieu a revoir   
+		/*for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				if(x > 0 && SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB()))
+			}
+		}*/
 		}
 	
 	protected void registerActors(Area area) {

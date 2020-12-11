@@ -20,7 +20,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Pinky extends MovableAreaEntity{
+public class Pinky extends Ghost{
 
 	private static final int ANIMATION_DURATION = 8;
 	private final int SPEED = 6;
@@ -83,19 +83,10 @@ public class Pinky extends MovableAreaEntity{
 		animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
 	}*/
 
-	@Override
-	public List<DiscreteCoordinates> getCurrentCells() {
-		// TODO Auto-generated method stub
-		return Collections.singletonList(getCurrentMainCellCoordinates());
-	}
-
+	
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public int getValue() {
-		return 500;
 	}
 
 	@Override
