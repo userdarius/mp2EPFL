@@ -41,7 +41,8 @@ public class Bonus extends CollectableAreaEntity{
 		// TODO Auto-generated method stub
 		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
-	
+	// bonjour hilbig cést la madame clara et vous etes tres fort 
+	// je suis sure que tu vas reussir a faire ces putain de fantomes 
 
 	@Override
 	public boolean takeCellSpace() {

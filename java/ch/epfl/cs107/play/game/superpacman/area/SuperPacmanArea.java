@@ -4,8 +4,10 @@
  */
 package ch.epfl.cs107.play.game.superpacman.area;
 
+import java.util.ArrayList;
+
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;
+import ch.epfl.cs107.play.game.superpacman.SuperPacman;import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -27,6 +29,14 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 	
 	public int getNumberOfDiamonds() {
 		return numberOfDiamonds;
+	}
+	
+	public void affraid() {
+		ArrayList<Ghost> tab = behavior.AffraidGhost;
+		for (int i = 0; i < tab.size(); i++) {
+			behavior.AffraidGhost.get(i).affraid();
+			
+		}
 	}
 	
 	

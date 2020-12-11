@@ -4,6 +4,7 @@
  */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
@@ -20,11 +22,19 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	
 	
 	private static final int radius = 5;
+	boolean affraid = false;
+	private SuperPacmanPlayer memory;
+	private GhostHandler GhostHandler;
+	private List<DiscreteCoordinates> fieldOfView;
 	
 	public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
+		memory = null;
 		
 		
+	}
+	public void update(float deltaTime) {
+		super.update(deltaTime);
 	}
 
 	@Override
@@ -33,6 +43,13 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	}
 	public int getValue() {
 		return 500;
+	}
+	
+	public void affraid() {
+		affraid = true;
+	}
+	public void disaffraid() {
+		affraid = false;
 	}
 
 	@Override
@@ -44,7 +61,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	@Override
 	public boolean isCellInteractable() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -55,20 +72,25 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		// TODO Auto-generated method stub
+		((SuperPacmanInteractionVisitor)v).interactWith(this);
 		
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		// TODO Auto-generated method stub
-		return null;
+		fieldOfView = new ArrayList<DiscreteCoordinates>();
+		for (int i = 5; i <= 5; i++) {
+			for(int j = 5; j <= 5; j++)  {
+				fieldOfView.add(new DiscreteCoordinates(getCurrentCells().get(0).x+1,getCurrentCells().get(0).y+j));
+			
+		}
+			
+		} return fieldOfView;
 	}
 
 	@Override
@@ -80,13 +102,18 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	@Override
 	public boolean wantsViewInteraction() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void interactWith(Interactable other) {
-		// TODO Auto-generated method stub
+		other.acceptInteraction(GhostHandler);
 		
+	}
+	public class GhostHandler implements SuperPacmanInteractionVisitor {
+		public void interactWith(SuperPacmanPlayer player) {
+			memory = player;
+		}
 	}
 
 }

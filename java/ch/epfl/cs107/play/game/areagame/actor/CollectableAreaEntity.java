@@ -12,7 +12,7 @@ public abstract class CollectableAreaEntity extends AreaEntity {
 	protected int value;
 	public CollectableAreaEntity(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public void isTaken() {
