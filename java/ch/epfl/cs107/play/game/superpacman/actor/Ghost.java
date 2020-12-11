@@ -30,7 +30,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		memory = null;
-		
+		GhostHandler = new GhostHandler();
 		
 	}
 	public void update(float deltaTime) {
