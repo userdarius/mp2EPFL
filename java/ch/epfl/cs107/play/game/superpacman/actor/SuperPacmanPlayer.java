@@ -114,7 +114,7 @@ public class SuperPacmanPlayer extends Player {
 			
 		} 
 		
-		public void interactWith(Ghost ghost) {
+		public void interactWith(Blinky ghost) {
 			
 			if (invulnerable()) {
 				score += ghost.getGhostScore();
