@@ -32,5 +32,5 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
 	 }
 	 default void interactWith(Blinky blinky) {
 		 
-	 }
+	 } 
 }

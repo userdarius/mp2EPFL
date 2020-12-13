@@ -56,7 +56,7 @@ public abstract class AreaBehavior
         }
     }
 
-
+ 
   
     protected boolean canLeave(Interactable entity, List<DiscreteCoordinates> coordinates) {
 

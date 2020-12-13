@@ -28,11 +28,11 @@ public class Blinky extends Ghost{
 	private Orientation desiredOrientation;
 	private static final int MAX = 100;
 	
-	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
-
+	
 
 	public Blinky(Area area, Orientation orientation, DiscreteCoordinates position, String name) {
 		super(area, orientation, position);
+		
 		extractsprites();
 		desiredOrientation = getOrientation();
 	}
@@ -58,17 +58,6 @@ public class Blinky extends Ghost{
 			animations[getOrientation().ordinal()].reset();
 		}
 
-		/*if(!isGhostAfraid()){
-			if (timer >= 0){
-				extractafraidsprites();
-				timer -=deltaTime;
-				isGhostAfraid();
-			}
-		}
-		else {
-			extractsprites();
-		}*/
-
 		super.update(deltaTime);
 	}
 
@@ -77,22 +66,8 @@ public class Blinky extends Ghost{
                 new Orientation[] {Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT});
         animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
 	}
-	/*public void extractafraidsprites() {
-		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/ghost.afraid", 2, 1, 1, this, 32, 16,
-				new Orientation[] {});
-		animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
-	}*/
-
-	
-	
-	
 	
 
-
-	public boolean isGhostAfraid(){
-
-		return false;
-	}
 
 	@Override
 	public boolean isViewInteractable() {
@@ -107,7 +82,10 @@ public class Blinky extends Ghost{
 
 	@Override
 	public void draw(Canvas canvas) {
-		animations[getOrientation().ordinal()].draw(canvas);
-		status.draw(canvas);
+		if (getAfraid()) {
+			super.draw(canvas);
+		} else {
+			animations[getOrientation().ordinal()].draw(canvas);
+		}
 	}
 }

@@ -37,7 +37,7 @@ public class Level2 extends SuperPacmanArea {
 	
 	
 	@Override
-	public String getTitle() {
+	public String getTitle() { 
 		
 		return "superpacman/Level2";
 	}

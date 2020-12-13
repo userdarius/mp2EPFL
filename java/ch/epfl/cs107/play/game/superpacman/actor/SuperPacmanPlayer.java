@@ -31,9 +31,10 @@ public class SuperPacmanPlayer extends Player {
 	private final int SPEED = 8;
 	private static final int ANIMATION_DURATION = 8;
 	private Animation[] animations;
-	private boolean invulnerable;
 	private static float timer;
-
+	
+	
+	private static int life = 3;
 	private static int score = 0;
 
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
@@ -54,12 +55,11 @@ public class SuperPacmanPlayer extends Player {
 	
 	public void update(float deltaTime) {
 		if (timer > 0) {
-			System.out.println(timer);
 			timer -= deltaTime;
 			
 		
 		}
-		System.out.println(invulnerable());
+		
 		if (hp < 0) hp = 0.f;
 		Keyboard keyboard= getOwnerArea().getKeyboard();
 		if (keyboard.get(Keyboard.LEFT).isDown()) {
@@ -112,11 +112,23 @@ public class SuperPacmanPlayer extends Player {
 				
 			}
 			
+		} 
+		
+		public void interactWith(Ghost ghost) {
+			
+			if (invulnerable()) {
+				score += ghost.getGhostScore();
+				ghost.respawnGhost();
+				
+			} else {
+				PacmanGetsEaten();
+			}
+			
 		}
 	}
 
 	public static int getLife() {
-		int life = 3;
+		life = 3;
 		return life;
 	}
 	
@@ -182,6 +194,19 @@ public class SuperPacmanPlayer extends Player {
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((SuperPacmanInteractionVisitor)v).interactWith(this);
+		
+	}
+	
+	
+	//Deuxieme point du 4.2
+	public void PacmanGetsEaten() {
+		life -= getLife();
+		getOwnerArea().leaveAreaCells(this, getEnteredCells());
+		getOwnerArea().enterAreaCells(this, getCurrentCells());
+		resetMotion();
+	}
+	public void GhostGetsEaten() {
+		
 		
 	}
 

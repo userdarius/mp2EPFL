@@ -46,7 +46,7 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 		}
 	}
 	
-	
+	 
 	
 	@Override 
 	public boolean isOn() {

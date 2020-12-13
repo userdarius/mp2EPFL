@@ -27,7 +27,7 @@ public class Pinky extends Ghost{
 	private Animation[] animations;
 	private Orientation desiredOrientation;
 	private static final int MAX = 100;
-	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
+	
 
 
 	public Pinky(Area area, Orientation orientation, DiscreteCoordinates position, String name) {
@@ -105,7 +105,10 @@ public class Pinky extends Ghost{
 
 	@Override
 	public void draw(Canvas canvas) {
+		if (getAfraid()) {
+			super.draw(canvas);
+		} else {
 		animations[getOrientation().ordinal()].draw(canvas);
-		status.draw(canvas);
+		}
 	}
 }

@@ -33,7 +33,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	public boolean hasTopEdge = false;
 	
 	
-	
+	 
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
 		 
@@ -116,20 +116,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		
 	}
 
-	//test les environs des ghosts
-	/*public boolean[][] ghostneighborhood(int x, int y) {      // je verifie le voisinage des fantomes
-		boolean [][] tab = new boolean[5][5];
-		for (int m = x -1, r = 0; m < x+2 ; m++, r++) {
-			for (int n = y+1, s = 0; n > y-2 ; n--, s++) {
-			
-				tab[r][s] = (cellexists(m,n) && SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-n, m )) == SuperPacman2CellType.FREE_WITH_BLINKY);
-				tab[r][s] = (cellexists(m,n) && SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-n, m )) == SuperPacman2CellType.FREE_WITH_INKY);
-				tab[r][s] = (cellexists(m,n) && SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight()-1-n, m )) == SuperPacman2CellType.FREE_WITH_PINKY);
-			}
-		}
-		return tab;
-	}*/
-	
 	
 	private boolean cellexists(int x, int y) {    //Avoid to getCell that do not exist       //Because we do not use it outside of this class
 		return ((x >= 0) && y >= 0 && x < getWidth() && y < getHeight());
@@ -139,7 +125,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	public void Affraid(Ghost g) {
 		for ( int i = 0; i < AffraidGhost.size(); i++ ) {
 			AffraidGhost.get(i);
-			
 		}
 		
 		
