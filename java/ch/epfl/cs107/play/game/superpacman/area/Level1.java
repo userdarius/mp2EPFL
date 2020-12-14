@@ -27,10 +27,10 @@ public class Level1 extends SuperPacmanArea{
 		
 		return "superpacman/Level1";
 	}
-
+ 
 	@Override
 	protected void createArea() {
-		// TODO Auto-generated method stub
+		
 		Door door = new Door("superpacman/Level2", LANDING_IN_NEW_AREA , Logic.TRUE, this , Orientation.UP, PRINCIPAL_CELL,OTHER_CELL);
 		registerActor(door);
 		Gate gate1 = new Gate(this, Orientation.RIGHT, GATE1, this);

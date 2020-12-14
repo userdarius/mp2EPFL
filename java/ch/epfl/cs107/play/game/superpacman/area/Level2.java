@@ -32,7 +32,7 @@ public class Level2 extends SuperPacmanArea {
 	private final DiscreteCoordinates GATE12 = new DiscreteCoordinates(17, 8);
 	private final DiscreteCoordinates GATE13 = new DiscreteCoordinates(14, 3);
 	private final DiscreteCoordinates GATE14 = new DiscreteCoordinates(15, 3);
-	
+	 
 	
 	
 	

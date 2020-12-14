@@ -53,7 +53,7 @@ public abstract class Player extends MovableAreaEntity implements Interactor {
      */
     private void resetDoorStates(){
         passedDoor = null;
-        isPassingADoor = false;
+        isPassingADoor = false; 
     }
 
     /// Getter and setter for interaction

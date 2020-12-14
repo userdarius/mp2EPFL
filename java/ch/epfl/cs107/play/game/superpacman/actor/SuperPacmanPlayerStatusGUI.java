@@ -4,7 +4,7 @@
  */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.awt.Color;
+import java.awt.Color; 
 
 import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.actor.ImageGraphics;

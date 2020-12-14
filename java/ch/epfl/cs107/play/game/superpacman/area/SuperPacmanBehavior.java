@@ -128,11 +128,10 @@ public class SuperPacmanBehavior extends AreaBehavior {
 		return AffraidGhost;
 
 	}
-
 	public void Affraid(Ghost g) {
 		for (int i = 0; i < AffraidGhost.size(); i++) {
 			AffraidGhost.get(i);
-		}
+		}}
 	}
 
 
@@ -219,10 +218,10 @@ public class SuperPacmanBehavior extends AreaBehavior {
 }
 
 
-		
-		
 
 
 
-	
+
+
+
 	

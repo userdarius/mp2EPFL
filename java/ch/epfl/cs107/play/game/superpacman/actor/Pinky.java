@@ -27,7 +27,7 @@ public class Pinky extends Ghost{
 	public Pinky(Area area, Orientation orientation, DiscreteCoordinates position, String name) {
 		super(area, orientation, position);
 		extractsprites();
-		desiredOrientation = getOrientation();
+		desiredOrientation = getOrientation(); 
 	}
 
 	public void update(float deltaTime) {
@@ -77,15 +77,6 @@ public class Pinky extends Ghost{
 	}*/
 
 	
-
-
-
-
-	public boolean isGhostAfraid(){
-
-		return false;
-	}
-
 	@Override
 	public boolean isViewInteractable() {
 		// TODO Auto-generated method stub

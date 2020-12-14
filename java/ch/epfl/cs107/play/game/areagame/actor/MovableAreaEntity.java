@@ -174,7 +174,7 @@ public abstract class MovableAreaEntity extends AreaEntity {
     public List<DiscreteCoordinates> getLeftCells(){
     	return leftCells;
     }
-
+ 
 
     /**
      * Indicate if a displacement is occurring

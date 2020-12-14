@@ -22,7 +22,7 @@ public class Blinky extends Ghost{
 	private Orientation desiredOrientation;
 	private static final int MAX = 100;
 	
-	
+	 
 
 	public Blinky(Area area, Orientation orientation, DiscreteCoordinates position, String name) {
 		super(area, orientation, position);
@@ -53,7 +53,7 @@ public class Blinky extends Ghost{
 		}
 
 		super.update(deltaTime);
-	}
+	} 
 
 	public void extractsprites() {
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/ghost.blinky", 2, 1, 1, this, 16, 16,
@@ -63,7 +63,7 @@ public class Blinky extends Ghost{
 	
 
 
-	@Override
+	@Override 
 	public boolean isViewInteractable() {
 		// TODO Auto-generated method stub
 		return true;
@@ -72,12 +72,12 @@ public class Blinky extends Ghost{
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((SuperPacmanInteractionVisitor)v).interactWith(this);
-	}
-
+	} 
+ 
 	@Override
 	public void draw(Canvas canvas) {
 		if (getAfraid()) {
-			super.draw(canvas);
+			super.draw(canvas); 
 		} else {
 			animations[getOrientation().ordinal()].draw(canvas);
 		}

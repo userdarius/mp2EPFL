@@ -1,3 +1,7 @@
+/* 
+ * Author: Maxime Hilbig
+ * Date: 27.11.2020
+ */
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.ArrayList;
@@ -35,11 +39,11 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 	
 	public void affraid() {
 		ArrayList<Ghost> tab = behavior.AffraidGhost;
-		for (int i = 0; i < tab.size(); i++) { 
+		for (int i = 0; i < tab.size(); i++) {
 			behavior.AffraidGhost.get(i).affraid();
 			
 		}
-	} 
+	}
 	
 	public void notAffraid() {
 		ArrayList<Ghost> tab = behavior.AffraidGhost;
@@ -53,7 +57,7 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 		ghost.respawnGhost();
 		}
 	}
-	
+
 	 
 	
 	@Override

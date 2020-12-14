@@ -66,7 +66,7 @@ public class Door extends AreaEntity{
 		this(destination, otherSideCoordinates, signal, area, orientation, position);
 		this.currentCells.addAll(Arrays.asList(otherCells));
 	}
-
+ 
 	/**
 	 * Getter for the door's Destination
 	 * @return (String)
