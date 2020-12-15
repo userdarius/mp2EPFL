@@ -16,6 +16,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.area.Level1;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -48,6 +49,7 @@ public class SuperPacmanPlayer extends Player {
 		extractsprites();
 		desiredOrientation = getOrientation();
 		
+		
 	}
 	public boolean invulnerable() {
 		return timer > 0;
@@ -56,10 +58,9 @@ public class SuperPacmanPlayer extends Player {
 	public void update(float deltaTime) {
 		if (timer > 0) {
 			timer -= deltaTime;
-			
-		
+
 		}
-		
+
 		if (hp < 0) hp = 0.f;
 		Keyboard keyboard= getOwnerArea().getKeyboard();
 		if (keyboard.get(Keyboard.LEFT).isDown()) {
@@ -82,7 +83,7 @@ public class SuperPacmanPlayer extends Player {
 			if (previousOrientation != getOrientation()) {
 				animations[getOrientation().ordinal()].reset();	
 				}
-
+ 
 			int SPEED = 6;
 			move(SPEED);
 			
@@ -111,25 +112,26 @@ public class SuperPacmanPlayer extends Player {
 				timer = 10;
 				
 			}
+			 
+		} 	
+		public void interactWith(Ghost ghost) {
 			
-		} 
-		
-		public void interactWith(Blinky ghost) {
-			
-			if (invulnerable()) {
+			if (invulnerable()) { 
 				score += ghost.getGhostScore();
 				ghost.respawnGhost();
 				
 			} else {
-				PacmanGetsEaten();
+				pacmanGetsEaten();
 			}
 			
 		}
 	}
 
 	public static int getLife() {
-		life = 3;
 		return life;
+	}
+	public void loseLifePoint() {
+		life = getLife() - 1;
 	}
 	
 	public static int getScore() {
@@ -142,7 +144,7 @@ public class SuperPacmanPlayer extends Player {
 	
 
 
-	
+
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		
@@ -151,19 +153,16 @@ public class SuperPacmanPlayer extends Player {
 
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean wantsCellInteraction() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean wantsViewInteraction() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -175,19 +174,17 @@ public class SuperPacmanPlayer extends Player {
 
 	@Override
 	public boolean takeCellSpace() {  //Il sera traversable, donc ne prend pas toute la place de la cellule
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isCellInteractable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isViewInteractable() {
-		// TODO Auto-generated method stub
+		
 		return true;
 	}
 
@@ -199,21 +196,21 @@ public class SuperPacmanPlayer extends Player {
 	
 	
 	//Deuxieme point du 4.2
-	public void PacmanGetsEaten() {
-		life -= getLife();
+	public void pacmanGetsEaten() {
+		loseLifePoint();
 		getOwnerArea().leaveAreaCells(this, getEnteredCells());
-		getOwnerArea().enterAreaCells(this, getCurrentCells());
+		setCurrentPosition(((SuperPacmanArea)getOwnerArea()).getPlayerSpawnPosition().toVector());
+		getOwnerArea().enterAreaCells(this, getCurrentCells() );
+		((SuperPacmanArea) getOwnerArea()).BackToRefuge();
 		resetMotion();
 	}
-	public void GhostGetsEaten() {
-		
-		
-	}
+	
 
 	@Override
 	public void draw(Canvas canvas) {
 		animations[getOrientation().ordinal()].draw(canvas);
 		status.draw(canvas);
+		
 	}
 	
 	

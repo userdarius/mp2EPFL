@@ -4,6 +4,7 @@
  */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,10 +27,12 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	
 	private static final int radius = 5;
 	private boolean affraid;
-	private final int GHOST_SCORE = 500; 
+	private final int GHOST_SCORE = 500;  
 	private SuperPacmanPlayer memory;
-	private DiscreteCoordinates refuge;
-	
+	public final DiscreteCoordinates refuge;
+	DiscreteCoordinates positionPacman = new DiscreteCoordinates(0,0);
+
+
 	//private Animation[] animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
 	private static final int ANIMATION_DURATION = 8;
 	private GhostHandler GhostHandler;
@@ -59,27 +62,39 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	public List<DiscreteCoordinates> getCurrentCells() {
 		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
-	/*public int getValue() { //?Value du Ghost???
-		return 500;
-	}*/
 	
 	public int getGhostScore() {
 		return GHOST_SCORE;
-		
 	}
+
+	private void PacmanPosition(SuperPacmanPlayer player){
+		List <DiscreteCoordinates> PacmanPosition = this.getFieldOfViewCells();
+		for(int i = 0; i < PacmanPosition.size(); i++){
+			if(PacmanPosition.get(i).equals(player.getCurrentCells().get(0))){
+				positionPacman = player.getCurrentCells().get(0);
+			}
+		}
+	}
+
+	public DiscreteCoordinates getPacmanPos(){
+		return positionPacman;
+	}
+
 	public void respawnGhost() {
 		getOwnerArea().leaveAreaCells(this, getEnteredCells());
 		setCurrentPosition(refuge.toVector());
 		getOwnerArea().enterAreaCells(this, getCurrentCells());
-		resetMotion();
+		resetMotion(); 
 	}
 	
 	public void affraid() {
 		affraid = true;
 	}
+
 	public void disaffraid() {
 		affraid = false;
 	}
+
 	public boolean getAfraid() {
 		return affraid;
 	}
@@ -99,7 +114,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	@Override
 	public boolean isViewInteractable() {
 		// TODO Auto-generated method stub
-		return false;
+		return false;  //c bon
 	}
 
 	@Override
@@ -111,21 +126,28 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	@Override
 	public void draw(Canvas canvas) {
 		GhostAfraid.draw(canvas);
-		status.draw(canvas);
+		//status.draw(canvas);
+	}
+	private boolean cellExists(int x, int y) {    //Avoid to getCell that do not exist       //Because we do not use it outside of this class
+		return ((x >= 0) && y >= 0 && x < getOwnerArea().getWidth() && y < getOwnerArea().getHeight());
+		
 	}
 
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
 		fieldOfView = new ArrayList<DiscreteCoordinates>();
-		for (int i = 5; i <= 5; i++) {     //Doit commencer a sa cellule de départ
-			for(int j = 5; j <= 5; j++)  {   //La ca ne marche pas je commence a 5
+		for (int i = -5; i <= 5; i++) {     //Doit commencer a sa cellule de départ
+			for(int j = -5; j <= 5; j++)  { //La ca ne marche pas je commence a 5
+				if (cellExists(i, j)) {
+					
+				
 				fieldOfView.add(new DiscreteCoordinates(getCurrentCells().get(0).x+1,getCurrentCells().get(0).y+j));
-			
+				}
 		}
-			
+			 
 		} return fieldOfView;
 	}
-	 
+	  
 	
 	@Override
 	public boolean wantsCellInteraction() {
@@ -136,7 +158,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	@Override
 	public boolean wantsViewInteraction() {
 		// TODO Auto-generated method stub
-		return true;
+		return true; 
 	}
 
 	@Override
@@ -149,6 +171,4 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 			memory = player;
 		}
 	}
-	
-
 }

@@ -32,7 +32,7 @@ public class SuperPacman extends RPG{
 	//private int areaIndex;
 	@Override
 	public String getTitle() {
-		
+		 
 		return "Super Pac-Man";
 	}
 	
@@ -70,10 +70,4 @@ public class SuperPacman extends RPG{
 		}
 		return false;
 	}
-	
-	
-	
-
-	
-
 }

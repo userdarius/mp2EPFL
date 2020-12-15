@@ -7,6 +7,7 @@ package ch.epfl.cs107.play.game.superpacman.area;
 import java.util.ArrayList;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior;
 import ch.epfl.cs107.play.io.FileSystem;
@@ -19,7 +20,11 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 	private int numberOfDiamonds = 0;
 
 	protected abstract void createArea();
-	
+
+	public AreaGraph getGraph(){
+		return behavior.grille;
+	}
+
 	protected void addDiamonds() {
 		numberOfDiamonds++;
 	}
@@ -33,11 +38,11 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 	
 	public void affraid() {
 		ArrayList<Ghost> tab = behavior.AffraidGhost;
-		for (int i = 0; i < tab.size(); i++) {
+		for (int i = 0; i < tab.size(); i++) { 
 			behavior.AffraidGhost.get(i).affraid();
 			
 		}
-	}
+	} 
 	
 	public void notAffraid() {
 		ArrayList<Ghost> tab = behavior.AffraidGhost;
@@ -45,10 +50,16 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 			behavior.AffraidGhost.get(i).disaffraid();
 		}
 	}
+
+	public void BackToRefuge() {  //  Quand le ghost mange un pacman, il retourne dans son carré
+		for(Ghost ghost : behavior.GetAffraidGhost()) {
+		ghost.respawnGhost();
+		}
+	}
 	
 	 
 	
-	@Override 
+	@Override
 	public boolean isOn() {
 		return numberOfDiamonds == 0;
 	}
