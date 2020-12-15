@@ -1,14 +1,11 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 27.11.2020
- */
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.ArrayList;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
+import ch.epfl.cs107.play.game.superpacman.SuperPacman;
+import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;

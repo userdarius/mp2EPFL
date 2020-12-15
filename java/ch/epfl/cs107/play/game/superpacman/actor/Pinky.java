@@ -2,15 +2,9 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.util.Collections;
-import java.util.List;
-import java.awt.Color;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
-import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
-import ch.epfl.cs107.play.game.areagame.actor.Interactable;
-import ch.epfl.cs107.play.game.areagame.actor.Interactor;
-import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;

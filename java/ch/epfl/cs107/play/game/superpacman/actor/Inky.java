@@ -1,19 +1,13 @@
 
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.awt.Color;
 import java.util.Queue;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.*;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RandomGenerator;
@@ -24,7 +18,6 @@ public class Inky extends Ghost{
 	private static final int ANIMATION_DURATION = 8;
 	private final int SPEED = 6;
 	private Animation[] animations;
-	private Orientation desiredOrientation;
 	private static final int MAX = 100;
 	private static final int MAX_DISTANCE_WHEN_SCARED = 5;
 	private static final int MAX_DISTANCE_WHEN_NOT_SCARED = 10;
@@ -35,7 +28,7 @@ public class Inky extends Ghost{
 	public Inky(Area area, Orientation orientation, DiscreteCoordinates position, String name) {
 		super(area, orientation, position);
 		extractsprites();
-		desiredOrientation = getOrientation();
+		Orientation desiredOrientation = getOrientation();
 	}
 
 	public void update(float deltaTime) {

@@ -4,7 +4,6 @@
  */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +26,6 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	
 	private static final int radius = 5;
 	private boolean affraid;
-	private final int GHOST_SCORE = 500;  
 	private SuperPacmanPlayer memory;
 	public final DiscreteCoordinates refuge;
 	DiscreteCoordinates positionPacman = new DiscreteCoordinates(0,0);
@@ -36,8 +34,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	//private Animation[] animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
 	private static final int ANIMATION_DURATION = 8;
 	private GhostHandler GhostHandler;
-	private List<DiscreteCoordinates> fieldOfView;
-	Sprite[] sprites = RPGSprite.extractSprites("superpacman/ghost.afraid", 2, 1, 1, this, 16, 16); 
+	Sprite[] sprites = RPGSprite.extractSprites("superpacman/ghost.afraid", 2, 1, 1, this, 16, 16);
 	
 	private Animation GhostAfraid = new Animation(2, sprites );
 	
@@ -64,13 +61,14 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	}
 	
 	public int getGhostScore() {
+		int GHOST_SCORE = 500;
 		return GHOST_SCORE;
 	}
 
 	private void PacmanPosition(SuperPacmanPlayer player){
 		List <DiscreteCoordinates> PacmanPosition = this.getFieldOfViewCells();
-		for(int i = 0; i < PacmanPosition.size(); i++){
-			if(PacmanPosition.get(i).equals(player.getCurrentCells().get(0))){
+		for (DiscreteCoordinates discreteCoordinates : PacmanPosition) {
+			if (discreteCoordinates.equals(player.getCurrentCells().get(0))) {
 				positionPacman = player.getCurrentCells().get(0);
 			}
 		}
@@ -135,7 +133,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		fieldOfView = new ArrayList<DiscreteCoordinates>();
+		List<DiscreteCoordinates> fieldOfView = new ArrayList<DiscreteCoordinates>();
 		for (int i = -5; i <= 5; i++) {     //Doit commencer a sa cellule de départ
 			for(int j = -5; j <= 5; j++)  { //La ca ne marche pas je commence a 5
 				if (cellExists(i, j)) {
