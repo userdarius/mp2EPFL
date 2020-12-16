@@ -55,6 +55,9 @@ public class SuperPacmanPlayer extends Player {
 	public boolean invulnerable() {
 		return timer > 0;
 	}
+	protected DiscreteCoordinates getPacmanPos() {
+		return getCurrentMainCellCoordinates();
+	}
 	
 	public void update(float deltaTime) {
 		if (timer > 0) {

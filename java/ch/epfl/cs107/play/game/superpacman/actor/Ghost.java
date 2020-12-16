@@ -1,7 +1,3 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 11.12.2020
- */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.util.ArrayList;
@@ -23,34 +19,36 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Ghost extends MovableAreaEntity implements Interactor {
-	
-	
+
+
 	private static final int radius = 5;
-	private boolean affraid;
-	private SuperPacmanPlayer memory;
+	protected boolean affraid;
+
 	public final DiscreteCoordinates refuge;
-	public DiscreteCoordinates positionPacman;
+
+	protected SuperPacmanPlayer seesPlayer;
 
 
 	//private Animation[] animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
 	private static final int ANIMATION_DURATION = 8;
 	private GhostHandler GhostHandler;
 	Sprite[] sprites = RPGSprite.extractSprites("superpacman/ghost.afraid", 2, 1, 1, this, 16, 16);
-	
+
 	private Animation GhostAfraid = new Animation(2, sprites );
-	
+
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();
 
-	
+
 	public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
-		memory = null;
+
 		GhostHandler = new GhostHandler();
 		this.refuge = position;
 	}
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		GhostAfraid.update(deltaTime);
+
 	}
 
 	@Override
@@ -63,10 +61,12 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 		return GHOST_SCORE;
 	}
 
-
-	public DiscreteCoordinates getPacmanPos(){
-		return positionPacman;
+	public DiscreteCoordinates getRefuge() {
+		return refuge;
 	}
+
+
+
 
 	public void respawnGhost() {
 		if(getEnteredCells() != null){
@@ -76,7 +76,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 		getOwnerArea().enterAreaCells(this, getCurrentCells());
 		resetMotion();
 	}
-	
+
 	public void affraid() {
 		affraid = true;
 	}
@@ -87,6 +87,14 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 
 	public boolean getAfraid() {
 		return affraid;
+	}
+
+	public SuperPacmanPlayer getSeesPlayer() {
+		return seesPlayer;
+	}
+	public void setSeesPlayer(SuperPacmanPlayer player) {
+		seesPlayer = player;
+
 	}
 
 	@Override
@@ -110,14 +118,14 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((SuperPacmanInteractionVisitor)v).interactWith(this);
-		
+
 	}
 
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
 		List<DiscreteCoordinates> fieldOfView = new ArrayList<DiscreteCoordinates>();
-		for (int i = -5 + getCurrentMainCellCoordinates().x; i <= 5 + getCurrentMainCellCoordinates().x; i++) {     //Doit commencer a sa cellule de départ
-			for(int j = -5 + getCurrentMainCellCoordinates().y; j <= 5 + getCurrentMainCellCoordinates().y; j++)  { //La ca ne marche pas je commence a 5
+		for (int i = -radius + getCurrentMainCellCoordinates().x; i <= radius + getCurrentMainCellCoordinates().x; i++) {     //Doit commencer a sa cellule de départ
+			for(int j = -radius + getCurrentMainCellCoordinates().y; j <= radius + getCurrentMainCellCoordinates().y; j++)  { //La ca ne marche pas je commence a 5
 				if (cellExists(i, j)) {
 					fieldOfView.add(new DiscreteCoordinates(i,j));
 				}
@@ -127,16 +135,13 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	}
 
 	protected boolean knowsPacman(){
-		if(memory != null){
-			return getFieldOfViewCells().contains(positionPacman);
-		}else{
-			return false;
-		}
-	}
+		return (seesPlayer != null);
 
+
+	}
 	public class GhostHandler implements GhostInteractionHandler{
 		public void interactWith(SuperPacmanPlayer player){
-			memory = player;
+			seesPlayer = player;
 			System.out.println("Inky sees you");
 		}
 	}
@@ -153,17 +158,17 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	}
 
 
-	/*public void positionPacman (SuperPacmanPlayer player) {
-		List<DiscreteCoordinates> viewRadius = this.getFieldOfViewCells();
-		for (DiscreteCoordinates discreteCoordinates : viewRadius) {
-			if (discreteCoordinates.equals(player.getCurrentCells().get(0))) {
-				positionPacman = player.getCurrentCells().get(0);
-			}
-		}
-	}*/
+   /*public void positionPacman (SuperPacmanPlayer player) {
+      List<DiscreteCoordinates> viewRadius = this.getFieldOfViewCells();
+      for (DiscreteCoordinates discreteCoordinates : viewRadius) {
+         if (discreteCoordinates.equals(player.getCurrentCells().get(0))) {
+            positionPacman = player.getCurrentCells().get(0);
+         }
+      }
+   }*/
 
 
-	
+
 	@Override
 	public boolean wantsCellInteraction() {
 		// TODO Auto-generated method stub
@@ -179,12 +184,13 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	@Override
 	public void interactWith(Interactable other) {
 		other.acceptInteraction(GhostHandler);
-		
-	}
-	/*public class GhostHandler implements SuperPacmanInteractionVisitor {
-		public void interactWith(SuperPacmanPlayer player) {
 
-			memory = player;
-		}
-	}*/
+	}
+   /*public class GhostHandler implements SuperPacmanInteractionVisitor {
+      public void interactWith(SuperPacmanPlayer player) {
+
+         memory = player;
+      }
+   }*/
 }
+

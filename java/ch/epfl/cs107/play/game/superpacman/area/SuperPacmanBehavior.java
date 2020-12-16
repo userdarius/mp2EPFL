@@ -1,4 +1,3 @@
-
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.ArrayList;
@@ -23,10 +22,19 @@ public class SuperPacmanBehavior extends AreaBehavior {
 
 
 	public AreaGraph grille = new AreaGraph();
-	private boolean hasLeftEdge = false;
-	private boolean hasRightEdge = false;
-	private boolean hasDownEdge = false;
-	private boolean hasTopEdge = false;
+	private boolean hasLeftEdge(int x , int y){
+		return ( x > 0 && (((SuperPacmanCell) getCell(x-1,y)).type != SuperPacman2CellType.WALL));
+	}
+	private boolean hasRightEdge (int x, int y){
+		return (x < getWidth() && (((SuperPacmanCell) getCell(x+1,y)).type != SuperPacman2CellType.WALL));
+	}
+	private boolean hasDownEdge (int x, int y){
+		return (y >0 && (((SuperPacmanCell) getCell(x,y-1)).type != SuperPacman2CellType.WALL));
+	}
+	private boolean hasTopEdge (int x, int y){
+		return ( y < getHeight() && (((SuperPacmanCell) getCell(x,y+1)).type != SuperPacman2CellType.WALL));
+
+	}
 
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
@@ -42,7 +50,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				if ((x > 0 && SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) != SuperPacman2CellType.WALL)) {
-					grille.addNode(new DiscreteCoordinates(x,y), hasLeftEdge, hasTopEdge, hasRightEdge, hasDownEdge);
+					grille.addNode(new DiscreteCoordinates(x,y), hasLeftEdge(x,y), hasTopEdge(x,y), hasRightEdge(x,y), hasDownEdge(x,y));
 				}
 			}
 		}
@@ -87,12 +95,12 @@ public class SuperPacmanBehavior extends AreaBehavior {
 					area.registerActor(inky);
 					AffraidGhost.add(inky);
 				}
-				/*if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
-					DiscreteCoordinates coordinates = new DiscreteCoordinates(x, y);
-					Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
-					area.registerActor(pinky);
-					AffraidGhost.add(pinky);
-				}*/
+            /*if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
+               DiscreteCoordinates coordinates = new DiscreteCoordinates(x, y);
+               Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
+               area.registerActor(pinky);
+               AffraidGhost.add(pinky);
+            }*/
 			}
 		}
 	}
@@ -201,5 +209,3 @@ public class SuperPacmanBehavior extends AreaBehavior {
 
 
 
-
-	
