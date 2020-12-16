@@ -2,13 +2,9 @@
 package ch.epfl.cs107.play.game.superpacman.handler;
 
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
-import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
-import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
-import ch.epfl.cs107.play.game.superpacman.actor.Inky;
-import ch.epfl.cs107.play.game.superpacman.actor.Pinky;
 
 public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
     default void interactWith(SuperPacman player){
@@ -21,5 +17,4 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
     default void interactWith(Ghost ghost) {
 
     }
-
 }

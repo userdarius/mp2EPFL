@@ -16,7 +16,9 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.area.Level1;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
+import ch.epfl.cs107.play.game.superpacman.handler.GhostInteractionHandler;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -48,7 +50,7 @@ public class SuperPacmanPlayer extends Player {
 		extractsprites();
 		desiredOrientation = getOrientation();
 		
-		
+
 	}
 	public boolean invulnerable() {
 		return timer > 0;
@@ -82,7 +84,7 @@ public class SuperPacmanPlayer extends Player {
 			if (previousOrientation != getOrientation()) {
 				animations[getOrientation().ordinal()].reset();	
 				}
- 
+
 			int SPEED = 6;
 			move(SPEED);
 			
@@ -111,11 +113,11 @@ public class SuperPacmanPlayer extends Player {
 				timer = 10;
 				
 			}
-			 
-		} 	
+
+		}
 		public void interactWith(Ghost ghost) {
 			
-			if (invulnerable()) { 
+			if (invulnerable()) {
 				score += ghost.getGhostScore();
 				ghost.respawnGhost();
 				
@@ -132,7 +134,7 @@ public class SuperPacmanPlayer extends Player {
 	public void loseLifePoint() {
 		life = getLife() - 1;
 	}
-	
+
 	public static int getScore() {
 		return score;
 	}
@@ -180,13 +182,13 @@ public class SuperPacmanPlayer extends Player {
 
 	@Override
 	public boolean isViewInteractable() {
-		
+
 		return true;
 	}
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
+		((GhostInteractionHandler)v).interactWith(this);
 		
 	}
 	
@@ -200,13 +202,13 @@ public class SuperPacmanPlayer extends Player {
 		((SuperPacmanArea) getOwnerArea()).BackToRefuge();
 		resetMotion();
 	}
-	
+
 
 	@Override
 	public void draw(Canvas canvas) {
 		animations[getOrientation().ordinal()].draw(canvas);
 		status.draw(canvas);
-		
+
 	}
 	
 	

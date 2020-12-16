@@ -2,7 +2,6 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
@@ -10,17 +9,13 @@ import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2Cell;
-import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
 import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
 import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
 import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.game.superpacman.actor.Inky;
-import ch.epfl.cs107.play.game.superpacman.actor.Pinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 
@@ -46,9 +41,8 @@ public class SuperPacmanBehavior extends AreaBehavior {
 		}
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if ((x > 0 && SuperPacmanBehavior.SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) != SuperPacman2CellType.WALL)) {
-					DiscreteCoordinates coordinates = new DiscreteCoordinates(x, y);
-					grille.addNode(coordinates, hasLeftEdge, hasTopEdge, hasRightEdge, hasDownEdge);
+				if ((x > 0 && SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) != SuperPacman2CellType.WALL)) {
+					grille.addNode(new DiscreteCoordinates(x,y), hasLeftEdge, hasTopEdge, hasRightEdge, hasDownEdge);
 				}
 			}
 		}
@@ -93,12 +87,12 @@ public class SuperPacmanBehavior extends AreaBehavior {
 					area.registerActor(inky);
 					AffraidGhost.add(inky);
 				}
-				if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
+				/*if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
 					DiscreteCoordinates coordinates = new DiscreteCoordinates(x, y);
 					Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
 					area.registerActor(pinky);
 					AffraidGhost.add(pinky);
-				}
+				}*/
 			}
 		}
 	}
@@ -131,8 +125,9 @@ public class SuperPacmanBehavior extends AreaBehavior {
 	public void Affraid(Ghost g) {
 		for (int i = 0; i < AffraidGhost.size(); i++) {
 			AffraidGhost.get(i);
-		}}
+		}
 	}
+
 
 
 	enum SuperPacman2CellType {
@@ -164,22 +159,9 @@ public class SuperPacmanBehavior extends AreaBehavior {
 		}
 	}
 
-	/**
-	 * Default Tuto2Behavior Constructor
-	 *
-	 * @param window (Window), not null
-	 * @param name   (String): Name of the Behavior, not null
-	 */
 	class SuperPacmanCell extends AreaBehavior.Cell {
 		private final SuperPacman2CellType type;
 
-		/**
-		 * Default Tuto2Cell Constructor
-		 *
-		 * @param x    (int): x coordinate of the cell
-		 * @param y    (int): y coordinate of the cell
-		 * @param type (EnigmeCellType), not null
-		 */
 		public SuperPacmanCell(int x, int y, SuperPacman2CellType type) {
 			super(x, y);
 			this.type = type;
@@ -208,14 +190,10 @@ public class SuperPacmanBehavior extends AreaBehavior {
 		@Override
 		public void acceptInteraction(AreaInteractionVisitor v) {
 		}
-
-		public void BackToRefuge() {     //  Quand le ghost mange un pacman, il retourne dans son carré
-
-		}
-
-
 	}
 }
+
+
 
 
 

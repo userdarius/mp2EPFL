@@ -30,7 +30,8 @@ public class Blinky extends Ghost{
 		extractsprites();
 		desiredOrientation = getOrientation();
 	}
-	
+
+
 	public void update(float deltaTime) {
 		int randomInt = RandomGenerator.getInstance().nextInt(4);
 		if(isDisplacementOccurs()) {
@@ -48,10 +49,6 @@ public class Blinky extends Ghost{
 			move(SPEED);
 		}
 
-		if(!isDisplacementOccurs()) {
-			animations[getOrientation().ordinal()].reset();
-		}
-
 		super.update(deltaTime);
 	} 
 
@@ -63,17 +60,6 @@ public class Blinky extends Ghost{
 	
 
 
-	@Override 
-	public boolean isViewInteractable() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
-	} 
- 
 	@Override
 	public void draw(Canvas canvas) {
 		if (getAfraid()) {

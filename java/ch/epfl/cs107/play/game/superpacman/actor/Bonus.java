@@ -62,9 +62,10 @@ public class Bonus extends CollectableAreaEntity{
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
+		if (v instanceof SuperPacmanInteractionVisitor) {
+			((SuperPacmanInteractionVisitor) v).interactWith(this); //uniquement le pacman peut interagir avec bonus
+		}
 	}
-
 	@Override
 	public void draw(Canvas canvas) {
 		animations[getOrientation().ordinal()].draw(canvas);
