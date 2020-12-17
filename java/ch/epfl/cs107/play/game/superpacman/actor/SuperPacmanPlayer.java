@@ -36,7 +36,7 @@ public class SuperPacmanPlayer extends Player {
 	private static float timer;
 	
 	
-	private static int life = 3;
+	private static int life = 5;
 	private static int score = 0;
 
 	SuperPacmanPlayerStatusGUI status = new SuperPacmanPlayerStatusGUI();

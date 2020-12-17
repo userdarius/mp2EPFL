@@ -95,7 +95,7 @@ public class Level2 extends SuperPacmanArea {
 
 	@Override
 	public float getIntensity() {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 

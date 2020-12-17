@@ -70,6 +70,7 @@ public class Inky extends Ghost {
 
 		if (seesPlayer == null) {
 			if(!alreadySeesAPlayer) {
+
 				findTargetPosition();
 				path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
 				alreadySeesAPlayer = true;

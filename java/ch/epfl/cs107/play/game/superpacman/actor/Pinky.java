@@ -73,9 +73,10 @@ public class Pinky extends Ghost {
 
         }
         if (seesPlayer == null) {
-            System.out.println("ca passe dans null");
+
+
             if(!alreadySeesAPlayer) {
-                System.out.println("2 test");
+
                 findTargetPosition();
                 path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
                 notSeenAPlayerBefore = false;
@@ -86,6 +87,7 @@ public class Pinky extends Ghost {
 
         }
         if (seesPlayer != null) {
+
             if (!notSeenAPlayerBefore) {
                 findTargetPosition();
                 path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
@@ -135,20 +137,24 @@ public class Pinky extends Ghost {
 
 
     public void setAfraid() {
-        for (int i = 0; i < MAX_RANDOM_ATTEMPT; i++) {
-        int height = getOwnerArea().getHeight();
-        int width = getOwnerArea().getWidth();
-        float distance;
-        DiscreteCoordinates randomCoordinates;
+        if(seesPlayer != null){
+            for (int i = 0; i < MAX_RANDOM_ATTEMPT; i++) {
+                int height = getOwnerArea().getHeight();
+                int width = getOwnerArea().getWidth();
+                float distance;
+                DiscreteCoordinates randomCoordinates;
 
-        do {
-            int randomX = RandomGenerator.getInstance().nextInt(height);
-            int randomY = RandomGenerator.getInstance().nextInt(width);
-            randomCoordinates = new DiscreteCoordinates(randomX, randomY);
-            distance = distanceBetween(seesPlayer.getPacmanPos(), randomCoordinates);
-            this.targetPos = randomCoordinates;
-        } while ((distance < MAX_DISTANCE_WHEN_SCARED) || ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos) == null);
-    }
+                do {
+                    int randomX = RandomGenerator.getInstance().nextInt(height);
+                    int randomY = RandomGenerator.getInstance().nextInt(width);
+                    randomCoordinates = new DiscreteCoordinates(randomX, randomY);
+                    distance = distanceBetween(seesPlayer.getPacmanPos(), randomCoordinates);
+                    this.targetPos = randomCoordinates;
+                } while ((distance < MAX_DISTANCE_WHEN_SCARED) || ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos) == null);
+            }
+        } else {
+            getNextOrientation();
+        }
     }
     public void setNotAfraid() {
         int height = getOwnerArea().getHeight();
