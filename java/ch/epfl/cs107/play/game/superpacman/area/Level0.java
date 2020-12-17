@@ -1,7 +1,3 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 27.11.2020
- */
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -37,26 +33,20 @@ public class Level0 extends SuperPacmanArea{
 		registerActor(gate1);
 		Gate gate2 = new Gate(this, Orientation.LEFT, GATE2, key);
 		registerActor(gate2);
-		
 	}
 
 	@Override
 	public DiscreteCoordinates getPlayerSpawnPosition() {
 		return PLAYER_SPAWN_POSITION;
-		
-		
 	}
 
 	@Override
 	public boolean isOff() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public float getIntensity() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }

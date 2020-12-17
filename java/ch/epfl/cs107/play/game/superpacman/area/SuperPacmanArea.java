@@ -1,7 +1,3 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 27.11.2020
- */
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.ArrayList;
@@ -29,14 +25,15 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 	protected void addDiamonds() {
 		numberOfDiamonds++;
 	}
+
 	public void removeDiamonds() {
 		numberOfDiamonds--;
 	}
-	
+
 	public int getNumberOfDiamonds() {
 		return numberOfDiamonds;
 	}
-	
+
 	public void affraid() {
 		ArrayList<Ghost> tab = behavior.AffraidGhost;
 		for (int i = 0; i < tab.size(); i++) {
@@ -58,8 +55,6 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 		}
 	}
 
-	 
-	
 	@Override
 	public boolean isOn() {
 		return numberOfDiamonds == 0;
@@ -69,6 +64,7 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 	public boolean isOff() {
 		return !(numberOfDiamonds == 0);
 	}
+
 	@Override
 	public float getIntensity() {
 		if (isOn()) {
@@ -79,18 +75,18 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 		}
 	}
 	
-	
 	@Override
 	public final float getCameraScaleFactor() {
 		return 15.f;
 	}
+
 	public abstract DiscreteCoordinates getPlayerSpawnPosition();
-	
+
 	   public boolean begin(Window window, FileSystem fileSystem) {
-	       
+
 		   if (super.begin(window, fileSystem)) {
 	            // Set the behavior map
-	        	
+
 	        	behavior = new SuperPacmanBehavior(window, getTitle());
 	            setBehavior(behavior);
 	            behavior.registerActors(this);

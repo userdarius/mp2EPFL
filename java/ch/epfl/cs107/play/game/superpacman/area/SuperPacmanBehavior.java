@@ -14,25 +14,26 @@ import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior {
 
-
 	public AreaGraph grille = new AreaGraph();
+
 	private boolean hasLeftEdge(int x , int y){
 		return ( x > 1 && (((SuperPacmanCell) getCell(x-1,y)).type != SuperPacman2CellType.WALL));
 	}
+
 	private boolean hasRightEdge (int x, int y){
 		return (x < getWidth()-1 && (((SuperPacmanCell) getCell(x+1,y)).type != SuperPacman2CellType.WALL));
 	}
+
 	private boolean hasDownEdge (int x, int y){
 		return (y >1 && (((SuperPacmanCell) getCell(x,y-1)).type != SuperPacman2CellType.WALL));
 	}
+
 	private boolean hasTopEdge (int x, int y){
 		return ( y < getHeight()-1 && (((SuperPacmanCell) getCell(x,y+1)).type != SuperPacman2CellType.WALL));
-
 	}
 
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
-
 		int height = getHeight();
 		int width = getWidth();
 		for (int y = 0; y < height; y++) {
@@ -50,9 +51,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
 		}
 	}
 
-
 	protected void registerActors(Area area) {
-
 		for (int y = 0; y < getHeight(); ++y) {
 			for (int x = 0; x < getWidth(); ++x) {
 				if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.WALL) {
@@ -90,11 +89,11 @@ public class SuperPacmanBehavior extends AreaBehavior {
 					AffraidGhost.add(inky);
 				}
           		 if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
-               DiscreteCoordinates coordinates = new DiscreteCoordinates(x, y);
-               Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
-               area.registerActor(pinky);
-               AffraidGhost.add(pinky);
-            }
+					DiscreteCoordinates coordinates = new DiscreteCoordinates(x, y);
+					Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
+					area.registerActor(pinky);
+					AffraidGhost.add(pinky);
+				}
 			}
 		}
 	}
@@ -103,34 +102,21 @@ public class SuperPacmanBehavior extends AreaBehavior {
 		boolean[][] tab = new boolean[3][3];
 		for (int m = x - 1, r = 0; m < x + 2; m++, r++) {
 			for (int n = y + 1, s = 0; n > y - 2; n--, s++) {
-
 				tab[r][s] = (cellExists(m, n) && SuperPacman2CellType.toType(getRGB(getHeight() - 1 - n, m)) == SuperPacman2CellType.WALL);
 			}
 		}
-
 		return tab;
-
 	}
-
 
 	private boolean cellExists(int x, int y) {    //Avoid to getCell that do not exist       //Because we do not use it outside of this class
 		return ((x >= 0) && y >= 0 && x < getWidth() && y < getHeight());
-
 	}
 
 	public ArrayList<Ghost> AffraidGhost = new ArrayList<Ghost>();
 
 	public ArrayList<Ghost> GetAffraidGhost() {
 		return AffraidGhost;
-
 	}
-	public void Affraid(Ghost g) {
-		for (int i = 0; i < AffraidGhost.size(); i++) {
-			AffraidGhost.get(i);
-		}
-	}
-
-
 
 	enum SuperPacman2CellType {
 		NONE(0), // never used as real content
@@ -147,7 +133,6 @@ public class SuperPacmanBehavior extends AreaBehavior {
 
 		SuperPacman2CellType(int type) {
 			this.type = type;
-
 		}
 
 		public static SuperPacman2CellType toType(int type) {

@@ -17,15 +17,6 @@ public class Wall extends AreaEntity{
 
 	Sprite sprite;
 
-	/**
-	 * Build a Wall from its position and its neighborhood.
-	 * The neighborhood allows to select the sprite, it is a 3x3 matrix
-	 * that indicate if a wall is present in the neighborhood,
-	 * the center corresponds to the current wall position
-	 * @param area (Area): Owner area. Not null 
-	 * @param position (DiscreteCoordinates): The wall position. Not null
-	 * @param neighborhood (boolean[][]):. The 3x3 matrix. Not null
-	 */
 	public Wall(Area area, DiscreteCoordinates position, boolean[][] neighborhood) {
 		super(area, Orientation.DOWN, position);
 

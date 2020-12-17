@@ -1,7 +1,3 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 27.11.2020
- */
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -32,13 +28,9 @@ public class Level2 extends SuperPacmanArea {
 	private final DiscreteCoordinates GATE12 = new DiscreteCoordinates(17, 8);
 	private final DiscreteCoordinates GATE13 = new DiscreteCoordinates(14, 3);
 	private final DiscreteCoordinates GATE14 = new DiscreteCoordinates(15, 3);
-	 
-	
-	
 	
 	@Override
-	public String getTitle() { 
-		
+	public String getTitle() {
 		return "superpacman/Level2";
 	}
 
@@ -54,8 +46,7 @@ public class Level2 extends SuperPacmanArea {
 		registerActor(key4);
 		
 		And combination = new And(key3, key4);
-		
-		
+
 		Gate gate1 = new Gate(this, Orientation.RIGHT, GATE1, key1);
 		registerActor(gate1);
 		Gate gate2 = new Gate(this, Orientation.DOWN, GATE2, key1);
@@ -84,20 +75,15 @@ public class Level2 extends SuperPacmanArea {
 		registerActor(gate13);
 		Gate gate14 = new Gate(this, Orientation.RIGHT, GATE14, this);
 		registerActor(gate14);
-		
-		
 	}
 
 	@Override	
-		public DiscreteCoordinates getPlayerSpawnPosition() {
+	public DiscreteCoordinates getPlayerSpawnPosition() {
 			return PLAYER_SPAWN_POSITION;
 	}
 
 	@Override
 	public float getIntensity() {
-
 		return 0;
 	}
-
-	
 }

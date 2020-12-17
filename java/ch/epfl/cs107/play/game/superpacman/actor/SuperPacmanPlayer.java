@@ -1,4 +1,3 @@
-
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.awt.Color;
@@ -49,12 +48,12 @@ public class SuperPacmanPlayer extends Player {
 		message.setAnchor(new Vector(-0.3f, 0.1f));
 		extractsprites();
 		desiredOrientation = getOrientation();
-		
-
 	}
+
 	public boolean invulnerable() {
 		return timer > 0;
 	}
+
 	protected DiscreteCoordinates getPacmanPos() {
 		return getCurrentMainCellCoordinates();
 	}
@@ -62,9 +61,7 @@ public class SuperPacmanPlayer extends Player {
 	public void update(float deltaTime) {
 		if (timer > 0) {
 			timer -= deltaTime;
-
 		}
-
 		if (hp < 0) hp = 0.f;
 		Keyboard keyboard= getOwnerArea().getKeyboard();
 		if (keyboard.get(Keyboard.LEFT).isDown()) {
@@ -76,29 +73,22 @@ public class SuperPacmanPlayer extends Player {
 		} else if (keyboard.get(Keyboard.DOWN).isDown()) {
 			desiredOrientation = Orientation.DOWN;
 		}
-		
 		if(isDisplacementOccurs()) {
 			animations[getOrientation().ordinal()].update(deltaTime);
 		}
-
 		if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector())))) {
 			Orientation previousOrientation = getOrientation();
 			orientate(desiredOrientation);// le faire tourner
 			if (previousOrientation != getOrientation()) {
 				animations[getOrientation().ordinal()].reset();	
 				}
-
 			int SPEED = 6;
 			move(SPEED);
-			
 		}
-		
 		if(!isDisplacementOccurs()) {
 			animations[getOrientation().ordinal()].reset();
 		}
-
 		super.update(deltaTime);
-		
 	}
 	
 	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
@@ -110,32 +100,23 @@ public class SuperPacmanPlayer extends Player {
 			score += collectableAreaEntity.getValue();
 			if (collectableAreaEntity instanceof Diamond) {
 				((SuperPacmanArea)getOwnerArea()).removeDiamonds();
-				
 			}
 			if (collectableAreaEntity instanceof Bonus) {
 				timer = 10;
-				
 			}
-
 		}
 		public void interactWith(Ghost ghost) {
-			
 			if (invulnerable()) {
 				score += ghost.getGhostScore();
 				ghost.respawnGhost();
-				
 			} else {
 				pacmanGetsEaten();
 			}
-			
 		}
 	}
 
 	public static int getLife() {
 		return life;
-	}
-	public void loseLifePoint() {
-		life = getLife() - 1;
 	}
 
 	public static int getScore() {
@@ -148,7 +129,6 @@ public class SuperPacmanPlayer extends Player {
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
-		
 		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
 
@@ -168,12 +148,6 @@ public class SuperPacmanPlayer extends Player {
 	}
 
 	@Override
-	public void interactWith(Interactable other) {
-		other.acceptInteraction(new SuperPacmanPlayerHandler());  //Gestion d'interaction faite par Handler
-		
-	}
-
-	@Override
 	public boolean takeCellSpace() {  //Il sera traversable, donc ne prend pas toute la place de la cellule
 		return false;
 	}
@@ -185,18 +159,19 @@ public class SuperPacmanPlayer extends Player {
 
 	@Override
 	public boolean isViewInteractable() {
-
 		return true;
+	}
+
+	@Override
+	public void interactWith(Interactable other) {
+		other.acceptInteraction(new SuperPacmanPlayerHandler());  //Gestion d'interaction faite par Handler
 	}
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((GhostInteractionHandler)v).interactWith(this);
-		
 	}
 	
-	
-	//Deuxieme point du 4.2
 	public void pacmanGetsEaten() {
 		loseLifePoint();
 		getOwnerArea().leaveAreaCells(this, getEnteredCells());
@@ -206,19 +181,20 @@ public class SuperPacmanPlayer extends Player {
 		resetMotion();
 	}
 
+	public void loseLifePoint() {
+		life = getLife() - 1;
+	}
+
 
 	@Override
 	public void draw(Canvas canvas) {
 		animations[getOrientation().ordinal()].draw(canvas);
 		status.draw(canvas);
-
 	}
-	
 	
 	public void extractsprites() {		
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
                 new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
         animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
 	}
-	
 }

@@ -1,7 +1,3 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 04.12.2020
- */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.util.Collections;
@@ -24,43 +20,37 @@ public class Cherry extends CollectableAreaEntity {
 
 	private Sprite cherry = new Sprite("superpacman/cherry", 1.f, 1.f, this);
 
+	@Override
+	public List<DiscreteCoordinates> getCurrentCells() {
+		return Collections.singletonList(getCurrentMainCellCoordinates());
+	}
+
 	public int getValue() {
 		return 200;
 	}
 
 	@Override
-	public List<DiscreteCoordinates> getCurrentCells() {
-		// TODO Auto-generated method stub
-		return Collections.singletonList(getCurrentMainCellCoordinates());
-	}
-
-	@Override
 	public boolean takeCellSpace() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isCellInteractable() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isViewInteractable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((SuperPacmanInteractionVisitor)v).interactWith(this);
-		
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
 		cherry.draw(canvas);
-		
 	}
 }

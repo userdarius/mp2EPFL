@@ -1,4 +1,3 @@
-
 package ch.epfl.cs107.play.game.superpacman.handler;
 
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;

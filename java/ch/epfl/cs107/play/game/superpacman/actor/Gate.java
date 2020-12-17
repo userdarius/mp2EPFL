@@ -1,7 +1,3 @@
-/* 
- * Author: Maxime Hilbig
- * Date: 07.12.2020
- */
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.util.Collections;
@@ -25,7 +21,6 @@ public class Gate extends AreaEntity {
 
 	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal ) {
 		super(area, orientation, position);
-		
 
 		this.signal = signal;
 		if (orientation == Orientation.UP || orientation == Orientation.DOWN) {
@@ -34,14 +29,9 @@ public class Gate extends AreaEntity {
 			gate = new Sprite("superpacman/gate", 1.f, 1.f, this, new RegionOfInterest(0, 64, 64, 64));
 		}
 	}
-	
-	
-	
-	
-	
+
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
-		// TODO Auto-generated method stub
 		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
 
@@ -52,20 +42,16 @@ public class Gate extends AreaEntity {
 
 	@Override
 	public boolean isCellInteractable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isViewInteractable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -73,7 +59,5 @@ public class Gate extends AreaEntity {
 		if (signal.isOff()) {
 		gate.draw(canvas);
 		}
-		
 	}
-
 }

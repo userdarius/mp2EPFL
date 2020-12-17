@@ -1,56 +1,34 @@
 package ch.epfl.cs107.play;
 
-import java.awt.GraphicsEnvironment;
 
 import ch.epfl.cs107.play.game.Game;
-import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
-import ch.epfl.cs107.play.game.tutosSolution.Tuto1;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.io.ResourceFileSystem;
-import ch.epfl.cs107.play.io.XMLTexts;
-import ch.epfl.cs107.play.recorder.RecordReplayer;
-import ch.epfl.cs107.play.recorder.Recorder;
 import ch.epfl.cs107.play.window.Window;
 import ch.epfl.cs107.play.window.swing.SwingWindow;
 
-/**
- * Main entry point.
- */
 public class Play {
 
 	/** One second in nano second */
     private static final float ONE_SEC = 1E9f;
 
-	/**
-	 * Main entry point.
-	 * @param args (Array of String): ignored
-	 */
 	public static void main(String[] args) {
 
 		// Define cascading file system
 		final FileSystem fileSystem = new ResourceFileSystem(DefaultFileSystem.INSTANCE);
-		//test243234
-
-        // Create a demo game :
-		// (it is expected that at the beginning, the provided file does not compile)
        
         final Game game = new SuperPacman();
-		//final AreaGame game = new Tuto1();
 
 		// Use Swing display
 		final Window window = new SwingWindow(game.getTitle(), fileSystem, 550, 550);
 		window.registerFonts(ResourcePath.FONTS);
-		
-		//Recorder recorder = new Recorder(window);
-		//RecordReplayer replayer = new RecordReplayer(window);
+
 		try {
 
 			if (game.begin(window, fileSystem)) {
-				//recorder.start();
-				//replayer.start("record1.xml");
 
 				// Use system clock to keep track of time progression
                 long currentTime = System.nanoTime();
@@ -80,11 +58,8 @@ public class Play {
 
                     // Render and update input
                     window.update();
-                    //recorder.update();
-                    //replayer.update();
 				}
 			}
-			//recorder.stop("record1.xml");
 			game.end();
 
 		} finally {
@@ -92,5 +67,4 @@ public class Play {
 			window.dispose();
 		}
 	}
-
 }
