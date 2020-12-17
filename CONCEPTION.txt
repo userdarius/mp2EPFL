@@ -1,0 +1,10 @@
+CONCEPTION DU MINI PROJET 2 D'INTRODUCTION À LA PROGRAMMATION PAR DARIUS FOODEEI ET MAXIME HILBIG - EPFL 2020
+
+----1----
+Aucune modifications à l'architecture proposée n'a été effectué.
+
+----2----
+Les classes et interfaces ajoutées sont celles de l'énoncé.
+
+----3----
+Aucun composants en plus n'a été introduit tout fonctionne comme demandé dans l'énoncé.
