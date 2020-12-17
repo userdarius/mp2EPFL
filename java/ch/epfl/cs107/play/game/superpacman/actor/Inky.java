@@ -17,9 +17,7 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Inky extends Ghost {
 	private DiscreteCoordinates targetPos;
 	private static final int ANIMATION_DURATION = 8;
-	private final int SPEED = 6;
 	private Animation[] animations;
-	private static final int MAX = 100;
 	private static final int MAX_DISTANCE_WHEN_SCARED = 5;
 	private static final int MAX_DISTANCE_WHEN_NOT_SCARED = 10;
 	public Path graphicPath;
@@ -45,39 +43,31 @@ public class Inky extends Ghost {
 		if (getCurrentMainCellCoordinates() == targetPos) {
 			findTargetPosition();
 			path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-
 		}
-
 
 		if (path.size() == 0) {
 			findTargetPosition();
 			path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-
 		}
 
 		if (affraid) {
 			if (!alreadyScared) {
 				findTargetPosition();
 				path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-				System.out.println("hello");
-
 				alreadyScared = true;
 				alreadyNotAffraid = false;
-
 			}
 		}
+
 		if (!affraid) {
 			if (!alreadyNotAffraid) {
-					findTargetPosition();
-					path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-
-
-
-					alreadyNotAffraid = true;
-					alreadyScared = false;
-				}
-
+				findTargetPosition();
+				path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
+				alreadyNotAffraid = true;
+				alreadyScared = false;
 			}
+		}
+
 		if (seesPlayer == null) {
 			if(!alreadySeesAPlayer) {
 				findTargetPosition();
@@ -85,8 +75,6 @@ public class Inky extends Ghost {
 				alreadySeesAPlayer = true;
 				notSeenAPlayerBefore = false;
 			}
-
-
 		}
 		if (seesPlayer != null) {
 			if (!notSeenAPlayerBefore) {
@@ -104,8 +92,6 @@ public class Inky extends Ghost {
 
 		}
 
-
-		//Orientation desiredOrientation = getNextOrientation();
 		if (!isDisplacementOccurs()) {
 			orientate(getNextOrientation());
 			move(18);
@@ -117,35 +103,6 @@ public class Inky extends Ghost {
 				new Orientation[]{Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT});
 		animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
 	}
-
-	public static float distanceBetween(DiscreteCoordinates a, DiscreteCoordinates b) {
-		return (float) Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
-	}
-
-
-	public Orientation getNextOrientation() {
-
-		//graphicPath = new      if (((SuperPacmanArea) getOwnerArea()).getGraph Path(this.getPosition(), new LinkedList<Orientation>(path));
-		//System.out.println("path computed");
-		if(seesPlayer != null) {
-			findTargetPosition();
-			path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-		}
-
-		System.out.println(path);
-		return path.poll();
-
-	}
-   
-   
-  
-    /*   int randomInt = RandomGenerator.getInstance().nextInt(4);
-       System.out.println("random path commputed");
-       return Orientation.fromInt(randomInt);*/
-
-
-
-
 
 	public void setAfraid() {
 		int height = getOwnerArea().getHeight();
@@ -162,7 +119,6 @@ public class Inky extends Ghost {
 		} while ((distance > MAX_DISTANCE_WHEN_SCARED) || ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos)==null );
 
 	}
-
 
 	public void setNotAfraid() {
 		int height = getOwnerArea().getHeight();
@@ -184,7 +140,6 @@ public class Inky extends Ghost {
 
 		if (!getAfraid()) {
 			if (knowsPacman()) {
-				System.out.println("knowspacman");
 				this.targetPos = getSeesPlayer().getPacmanPos();
 			} else {
 				setNotAfraid();
@@ -195,6 +150,24 @@ public class Inky extends Ghost {
 
 
 
+
+	}
+
+	public static float distanceBetween(DiscreteCoordinates a, DiscreteCoordinates b) {
+		return (float) Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+	}
+
+	public Orientation getNextOrientation() {
+
+		//graphicPath = new      if (((SuperPacmanArea) getOwnerArea()).getGraph Path(this.getPosition(), new LinkedList<Orientation>(path));
+		//System.out.println("path computed");
+		if(seesPlayer != null) {
+			findTargetPosition();
+			path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
+		}
+
+		System.out.println(path);
+		return path.poll();
 
 	}
 
@@ -210,4 +183,5 @@ public class Inky extends Ghost {
 		}
 	}
 }
+
 

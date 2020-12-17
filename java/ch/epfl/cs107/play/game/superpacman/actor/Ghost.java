@@ -142,7 +142,7 @@ public class Ghost extends MovableAreaEntity implements Interactor {
 	public class GhostHandler implements GhostInteractionHandler{
 		public void interactWith(SuperPacmanPlayer player){
 			seesPlayer = player;
-			System.out.println("Inky sees you");
+
 		}
 	}
 

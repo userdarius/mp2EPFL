@@ -8,31 +8,25 @@ import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.actor.*;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
-import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
-import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
-import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
-import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
-import ch.epfl.cs107.play.game.superpacman.actor.Inky;
-import ch.epfl.cs107.play.game.superpacman.actor.Wall;
-import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 
 public class SuperPacmanBehavior extends AreaBehavior {
 
 
 	public AreaGraph grille = new AreaGraph();
 	private boolean hasLeftEdge(int x , int y){
-		return ( x > 0 && (((SuperPacmanCell) getCell(x-1,y)).type != SuperPacman2CellType.WALL));
+		return ( x > 1 && (((SuperPacmanCell) getCell(x-1,y)).type != SuperPacman2CellType.WALL));
 	}
 	private boolean hasRightEdge (int x, int y){
-		return (x < getWidth() && (((SuperPacmanCell) getCell(x+1,y)).type != SuperPacman2CellType.WALL));
+		return (x < getWidth()-1 && (((SuperPacmanCell) getCell(x+1,y)).type != SuperPacman2CellType.WALL));
 	}
 	private boolean hasDownEdge (int x, int y){
-		return (y >0 && (((SuperPacmanCell) getCell(x,y-1)).type != SuperPacman2CellType.WALL));
+		return (y >1 && (((SuperPacmanCell) getCell(x,y-1)).type != SuperPacman2CellType.WALL));
 	}
 	private boolean hasTopEdge (int x, int y){
-		return ( y < getHeight() && (((SuperPacmanCell) getCell(x,y+1)).type != SuperPacman2CellType.WALL));
+		return ( y < getHeight()-1 && (((SuperPacmanCell) getCell(x,y+1)).type != SuperPacman2CellType.WALL));
 
 	}
 
@@ -95,12 +89,12 @@ public class SuperPacmanBehavior extends AreaBehavior {
 					area.registerActor(inky);
 					AffraidGhost.add(inky);
 				}
-            /*if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
+            if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
                DiscreteCoordinates coordinates = new DiscreteCoordinates(x, y);
                Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
                area.registerActor(pinky);
                AffraidGhost.add(pinky);
-            }*/
+            }
 			}
 		}
 	}

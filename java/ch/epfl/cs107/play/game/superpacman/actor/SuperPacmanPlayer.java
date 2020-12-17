@@ -113,7 +113,7 @@ public class SuperPacmanPlayer extends Player {
 				
 			}
 			if (collectableAreaEntity instanceof Bonus) {
-				timer = 10;
+				timer = 30;
 				
 			}
 
