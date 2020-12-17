@@ -24,7 +24,7 @@ public class Pinky extends Ghost {
     private static final int MAX_DISTANCE_WHEN_NOT_SCARED = 10;
     public Path graphicPath;
     private boolean alreadyScared;
-    private boolean alreadyNotAffraid;
+    private boolean alreadyNotAfraid;
     private boolean alreadySeesAPlayer;
     private boolean notSeenAPlayerBefore;
     protected Queue<Orientation> path;
@@ -58,31 +58,29 @@ public class Pinky extends Ghost {
             if (!alreadyScared) {
                 findTargetPosition();
                 path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-
-
                 alreadyScared = true;
-                alreadyNotAffraid = false;
+                alreadyNotAfraid = false;
 
             }
         }
         if (!affraid) {
-            if (!alreadyNotAffraid) {
+            if (!alreadyNotAfraid) {
                 findTargetPosition();
                 path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-
-
-
-                alreadyNotAffraid = true;
+                alreadyNotAfraid = true;
                 alreadyScared = false;
             }
 
         }
         if (seesPlayer == null) {
+            System.out.println("ca passe dans null");
             if(!alreadySeesAPlayer) {
+                System.out.println("2 test");
                 findTargetPosition();
                 path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-                alreadySeesAPlayer = true;
                 notSeenAPlayerBefore = false;
+                alreadySeesAPlayer = true;
+
             }
 
 
@@ -91,7 +89,6 @@ public class Pinky extends Ghost {
             if (!notSeenAPlayerBefore) {
                 findTargetPosition();
                 path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-
                 notSeenAPlayerBefore = true;
                 alreadySeesAPlayer = false;
             }
@@ -156,14 +153,14 @@ public class Pinky extends Ghost {
     public void setNotAfraid() {
         int height = getOwnerArea().getHeight();
         int width = getOwnerArea().getWidth();
-        float distance;
+
         DiscreteCoordinates randomCoordinates;
 
         do {
             int randomX = RandomGenerator.getInstance().nextInt(height);
             int randomY = RandomGenerator.getInstance().nextInt(width);
             randomCoordinates = new DiscreteCoordinates(randomX, randomY);
-            distance = distanceBetween(refuge, randomCoordinates);
+            //distance = distanceBetween(refuge, randomCoordinates);
             this.targetPos = randomCoordinates;
         } while(((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos)==null );
     }

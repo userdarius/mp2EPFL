@@ -80,7 +80,6 @@ public class Inky extends Ghost {
 			if (!notSeenAPlayerBefore) {
 				findTargetPosition();
 				path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
-				System.out.println(path);
 				notSeenAPlayerBefore = true;
 				alreadySeesAPlayer = false;
 			}
@@ -166,7 +165,7 @@ public class Inky extends Ghost {
 			path = ((SuperPacmanArea) getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(), targetPos);
 		}
 
-		System.out.println(path);
+
 		return path.poll();
 
 	}

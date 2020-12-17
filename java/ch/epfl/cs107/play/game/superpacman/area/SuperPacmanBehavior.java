@@ -89,7 +89,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
 					area.registerActor(inky);
 					AffraidGhost.add(inky);
 				}
-            if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
+          		 if (SuperPacman2CellType.toType(getRGB(getHeight() - 1 - y, x)) == SuperPacman2CellType.FREE_WITH_PINKY) {
                DiscreteCoordinates coordinates = new DiscreteCoordinates(x, y);
                Pinky pinky = new Pinky(area, Orientation.UP, coordinates, "pinky");
                area.registerActor(pinky);
